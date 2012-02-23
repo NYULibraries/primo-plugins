@@ -6,6 +6,7 @@ package edu.nyu.libraries.util;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class DataWarehouseModuleTest {
 	}
 	
 	@Test
-	public void testGetConnection() {
+	public void testGetConnection() throws SQLException  {
 		Connection connection = injector.getInstance(Connection.class);
 		assertTrue(connection instanceof Connection);
 	}

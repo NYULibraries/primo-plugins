@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { DataWarehouseConnectionModuleTest.class, 
+@Suite.SuiteClasses( { DataWarehousePropertiesModuleTest.class, 
 	DataWarehouseModuleTest.class, DataWarehouseTest.class })
 
 /**

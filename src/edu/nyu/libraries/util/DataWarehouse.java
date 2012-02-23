@@ -21,9 +21,6 @@ public class DataWarehouse {
 	private Connection connection;
 	private Map<String, PreparedStatement> preparedStatements;
 	private PreparedStatement activePreparedStatement;
-	// Informs the driver to use server a side-cursor, 
-	// which permits more than one active statement 
-	// on a connection.
 	
 	@Inject
 	public DataWarehouse(Connection connection) {
