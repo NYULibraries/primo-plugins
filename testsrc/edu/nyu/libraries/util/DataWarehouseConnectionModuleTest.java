@@ -6,6 +6,7 @@ package edu.nyu.libraries.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.annotation.Annotation;
 import java.sql.Driver;
 
 import org.junit.Before;
