@@ -3,7 +3,7 @@
  */
 package edu.nyu.libraries.util;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Connection;
 
