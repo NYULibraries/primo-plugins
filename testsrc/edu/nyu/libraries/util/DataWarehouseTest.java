@@ -3,9 +3,8 @@
  */
 package edu.nyu.libraries.util;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.Test;
 
@@ -20,11 +19,9 @@ import com.google.inject.Injector;
 public class DataWarehouseTest {
 	
 	@Test
-	public void testIntantiate() {
+	public void testIntantiate() throws SQLException {
 		Injector injector = 
 			Guice.createInjector(new DataWarehouseModule());
-		DataWarehouse dataWarehouse = 
-			new DataWarehouse(injector.getInstance(Connection.class));
-		assertTrue(dataWarehouse instanceof DataWarehouse);
+		new DataWarehouse(injector.getInstance(Connection.class));
 	}
 }
