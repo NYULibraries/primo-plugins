@@ -3,9 +3,14 @@
  */
 package edu.nyu.libraries.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
+import java.sql.Connection;
 
 import org.junit.Test;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 
 /**
@@ -15,7 +20,11 @@ import org.junit.Test;
 public class DataWarehouseTest {
 	
 	@Test
-	public void testAccepts() {
-		assertTrue(true);
+	public void testIntantiate() {
+		Injector injector = 
+			Guice.createInjector(new DataWarehouseModule());
+		DataWarehouse dataWarehouse = 
+			new DataWarehouse(injector.getInstance(Connection.class));
+		assertTrue(dataWarehouse instanceof DataWarehouse);
 	}
 }

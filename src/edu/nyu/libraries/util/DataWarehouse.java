@@ -26,7 +26,7 @@ public class DataWarehouse {
 	// on a connection.
 	
 	@Inject
-	public DataWarehouse(Connection connection) throws Exception {
+	public DataWarehouse(Connection connection) {
 		this.connection = connection;
 		preparedStatements = Maps.newHashMap();
 	}
