@@ -1,0 +1,3 @@
+Primo plugins are hooks into Primo to extend functionality.  Currently
+we only have a skeleton for plugins since we're waiting for the latest 
+Primo API JARs to be installed via the next Primo service pack.
