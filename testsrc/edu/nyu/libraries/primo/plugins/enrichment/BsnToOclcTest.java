@@ -47,7 +47,7 @@ public class BsnToOclcTest {
 		mappingTableFetcher = new MappingTableFetcher();
 		enrichmentPluginParams = Maps.newHashMap();
 		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().
-			parse(new File("testhelp/nyu_aleph.xml"));
+			parse(new File("testfiles/nyu_aleph.xml"));
 	}
 
 	/**

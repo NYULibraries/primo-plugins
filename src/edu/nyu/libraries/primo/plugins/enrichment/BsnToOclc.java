@@ -3,8 +3,10 @@
  */
 package edu.nyu.libraries.primo.plugins.enrichment;
 
+import java.io.FileReader;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Properties;
 
 import org.w3c.dom.Document;
 
@@ -16,8 +18,9 @@ import com.google.common.collect.Lists;
  * 
  */
 public class BsnToOclc extends DataWarehouseEnrichmentPlugin {
-	private final String SQL_SELECT_STUB = 
-		"SELECT OCLC_MASTER FROM HARVARD_PROJECT_OCLC_KEYS WHERE ALEPH_BSN = ";
+	private final String sqlPrefix;
+	private final String PROPERTIES_FILE_NAME = 
+		"./config/bsn_to_oclc.properties";
 
 	/**
 	 * Public constructor.
@@ -26,6 +29,9 @@ public class BsnToOclc extends DataWarehouseEnrichmentPlugin {
 	 */
 	public BsnToOclc() throws Exception {
 		super();
+		Properties properties = new Properties();
+		properties.load(new FileReader(PROPERTIES_FILE_NAME));
+		sqlPrefix = properties.getProperty("sqlPrefix");
 	}
 
 	/**
@@ -41,7 +47,7 @@ public class BsnToOclc extends DataWarehouseEnrichmentPlugin {
 		List<String> oclcs = Lists.newArrayList();
 		for (String bsn: bsns) {
 			ResultSet resultSet = 
-				getResultSet(SQL_SELECT_STUB + bsn);
+				getResultSet(sqlPrefix + bsn);
 			while(resultSet.next()) {
 				oclcs.add(resultSet.getString("OCLC_MASTER"));
 			}
