@@ -3,7 +3,9 @@
  */
 package edu.nyu.libraries.primo.plugins.enrichment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.util.Map;
@@ -21,9 +23,9 @@ import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Maps;
 
-import edu.nyu.libraries.primo.test.utilities.EnrichmentDocUtils;
-import edu.nyu.libraries.primo.test.utilities.MappingTableFetcher;
-import edu.nyu.libraries.primo.test.utilities.PrimoLogger;
+import edu.nyu.libraries.primo.test.util.EnrichmentDocUtils;
+import edu.nyu.libraries.primo.test.util.MappingTableFetcher;
+import edu.nyu.libraries.primo.test.util.PrimoLogger;
 
 
 /**

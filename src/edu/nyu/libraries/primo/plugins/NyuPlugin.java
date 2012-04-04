@@ -47,6 +47,7 @@ public abstract class NyuPlugin {
 	 * Register Primo logger with the plugin.
 	 */
 	public void registerLogger(IPrimoLogger primoLogger) {
+		primoLogger.setClass(this.getClass());
 		primoLoggers.add(primoLogger);
 	}
 	

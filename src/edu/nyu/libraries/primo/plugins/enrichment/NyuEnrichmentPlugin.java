@@ -4,6 +4,7 @@
 package edu.nyu.libraries.primo.plugins.enrichment;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -11,6 +12,7 @@ import org.w3c.dom.Document;
 import com.exlibris.primo.api.common.IMappingTablesFetcher;
 import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.EnrichmentPlugin;
+import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 
 import edu.nyu.libraries.primo.plugins.NyuPlugin;
 
@@ -23,15 +25,16 @@ import edu.nyu.libraries.primo.plugins.NyuPlugin;
  *
  */
 public abstract class NyuEnrichmentPlugin extends NyuPlugin implements EnrichmentPlugin {
-	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher tablesFetcher;
 	private Map<String, Object> paramsMap;
+	private final List<SectionTag> enrichmentSectionTags;
 
 	/**
 	 * Public constructor for NYU Enrichments.
 	 */
-	public NyuEnrichmentPlugin() {
+	public NyuEnrichmentPlugin(List<SectionTag> enrichmentSectionTags) {
 		super("NyuEnrichments");
+		this.enrichmentSectionTags = enrichmentSectionTags;
 	}
 	
 	/**
@@ -42,9 +45,6 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 	public void init(IPrimoLogger primoLogger, 
 			IMappingTablesFetcher tablesFetcher, 
 			Map<String, Object> paramsMap) throws Exception {
-		this.primoLogger = primoLogger;
-		System.out.println(this.getClass());
-		this.primoLogger.setClass(this.getClass());
 		this.tablesFetcher = tablesFetcher;
 		this.paramsMap = paramsMap;
 		registerLogger(primoLogger);
@@ -62,6 +62,14 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 			doc.getElementsByTagName("recordid").item(0).getTextContent() +
 			"\n" + e.getMessage(), e);
 		return false;
+	}
+	
+	protected Document addEnrichmentTags(Document doc, 
+			IEnrichmentDocUtils docUtil, List<String> values) {
+		for(SectionTag sectionTag: enrichmentSectionTags)
+			docUtil.addTags(doc, sectionTag.section, sectionTag.tag, 
+				values.toArray(new String[0]));
+		return doc;
 	}
 	
 	/**

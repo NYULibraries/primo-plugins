@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.nyu.libraries.primo.test.utilities;
+package edu.nyu.libraries.primo.test.util;
 
 import com.exlibris.primo.api.common.IPrimoLogger;
 

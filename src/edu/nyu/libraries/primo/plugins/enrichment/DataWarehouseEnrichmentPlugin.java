@@ -5,6 +5,7 @@ package edu.nyu.libraries.primo.plugins.enrichment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -29,7 +30,9 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	 * Public constructor.
 	 * @throws Exception
 	 */
-	public DataWarehouseEnrichmentPlugin() throws Exception {
+	public DataWarehouseEnrichmentPlugin(
+			List<SectionTag> enrichmentSectionTags) throws Exception {
+		super(enrichmentSectionTags);
 		Injector injector = 
 			Guice.createInjector(new DataWarehouseModule());
 		dataWarehouse = injector.getInstance(DataWarehouse.class);
