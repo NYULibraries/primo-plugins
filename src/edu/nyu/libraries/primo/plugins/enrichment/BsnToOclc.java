@@ -9,7 +9,7 @@ package edu.nyu.libraries.primo.plugins.enrichment;
  */
 public class BsnToOclc extends AlephBsnMapper {
 	private final static String PROPERTIES_FILE_NAME = 
-		"./config/bsn_to_oclc.properties";
+		"META-INF/bsn_to_oclc.properties";
 	
 	/**
 	 * Public constructor.

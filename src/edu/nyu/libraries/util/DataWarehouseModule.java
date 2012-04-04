@@ -23,7 +23,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
  */
 public class DataWarehouseModule extends AbstractModule {
 	private final static String PROPERTIES_FILE_NAME = 
-		"./config/datawarehouse.properties";
+		"./META-INF/datawarehouse.properties";
 	private Properties properties;
 	private Driver driver;
 	private String connectionURL;
