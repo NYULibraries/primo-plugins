@@ -8,7 +8,7 @@
   <property name="lib"  location="lib" />
   <property name="build" location="bin" />
   <property name="dist"  location="dist" />
-  <property name="config"  location="config" />
+  <property name="config"  location="META-INF" />
 
   <target name="clean" description="Clean up the build and dist directories">
     <delete dir="${build}"/>
@@ -22,10 +22,6 @@
     <mkdir dir="${dist}/lib" />
     <copy todir="${dist}/lib">
       <fileset dir="${lib}" includes="**/*.jar" />
-    </copy>
-    <mkdir dir="${dist}/config" />
-    <copy todir="${dist}/config">
-      <fileset dir="${config}" includes="**/*.properties" />
     </copy>
   </target>
 
@@ -41,7 +37,8 @@
     <fileset dir="${dist}/lib" id="dist.jars" includes="**/*.jar" />
     <jar jarfile="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar">
       <fileset dir="${build}"/>
+      <metainf dir="${config}" includes="**/*.properties" />
     </jar>
-    <symlink link="${dist}/lcs.jar" resource="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar" />
+    <symlink link="${dist}/nyu-libraries-primo-plugins.jar" resource="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar" />
   </target>
 </project>

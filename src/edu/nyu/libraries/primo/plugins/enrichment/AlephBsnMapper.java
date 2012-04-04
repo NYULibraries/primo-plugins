@@ -4,12 +4,10 @@
 package edu.nyu.libraries.primo.plugins.enrichment;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 
 import org.w3c.dom.Document;
 
@@ -24,24 +22,19 @@ import com.google.common.collect.Lists;
 public abstract class AlephBsnMapper extends DataWarehouseEnrichmentPlugin {
 	private final String sqlQuery;
 
-	protected final static String sqlQuery(String propertiesFileName) 
-			throws FileNotFoundException, IOException {
-		Properties properties = new Properties();
-		properties.load(new FileReader(propertiesFileName));
-		String table = properties.getProperty("table");
+	protected final static String sqlQuery(String table, String column,  
+			String bsnColumn) throws FileNotFoundException, IOException {
 		if (	table == null) 
 			throw new NullPointerException(
-				"No property 'table' defined in properties file.");
-		String column = properties.getProperty("column");
+				"No property 'table' defined.");
 		if (	column == null) 
 			throw new NullPointerException(
-				"No property 'column' defined in properties file.");
-		String bsnColumn = properties.getProperty("bsnColumn");
+				"No property 'column' defined.");
 		if (	bsnColumn == null) 
 			throw new NullPointerException(
-				"No property 'bsnColumn' defined in properties file.");
-		return "SELECT " + column + " FROM " + table + " WHERE " + 
-			bsnColumn + " = ";
+				"No property 'bsnColumn' defined.");
+		return "SELECT " + column + " FROM " + table + 
+			" WHERE " + bsnColumn + " = ";
 }
 
 protected final static List<SectionTag> enrichmentSectionTags(SectionTag... sectionTags) {

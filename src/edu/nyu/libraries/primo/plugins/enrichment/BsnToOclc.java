@@ -8,9 +8,10 @@ package edu.nyu.libraries.primo.plugins.enrichment;
  * 
  */
 public class BsnToOclc extends AlephBsnMapper {
-	private final static String PROPERTIES_FILE_NAME = 
-		"META-INF/bsn_to_oclc.properties";
-	
+	private final static String table = "HARVARD_PROJECT_OCLC_KEYS";
+	private final static String column = "OCLC_MASTER";
+	private final static String bsnColumn = "ALEPH_BSN"; 
+
 	/**
 	 * Public constructor.
 	 * 
@@ -18,7 +19,7 @@ public class BsnToOclc extends AlephBsnMapper {
 	 */
 	public BsnToOclc() throws Exception {
 		super(
-			sqlQuery(PROPERTIES_FILE_NAME), 
+			sqlQuery(table, column, bsnColumn), 
 			enrichmentSectionTags(
 				new SectionTag("addata", "oclcid"), 
 				new SectionTag("search", "oclc")));
