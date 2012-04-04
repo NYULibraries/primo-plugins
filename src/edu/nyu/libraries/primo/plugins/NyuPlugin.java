@@ -5,7 +5,11 @@ package edu.nyu.libraries.primo.plugins;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Logger;
+
+import com.exlibris.primo.api.common.IPrimoLogger;
+import com.google.common.collect.Lists;
 
 /**
  * @author Scot Dalton
@@ -16,7 +20,8 @@ import java.util.logging.Logger;
  * 
  */
 public abstract class NyuPlugin {
-	private Logger logger;
+	private List<Logger> loggers;
+	private List<IPrimoLogger> primoLoggers;
 	private SimpleDateFormat dateFormat;
 	
 	/**
@@ -25,8 +30,24 @@ public abstract class NyuPlugin {
 	 * @param name - subsystem name
 	 */
 	public NyuPlugin(String name) {
-		logger = Logger.getLogger(name);
+		loggers = Lists.newArrayList();
+		primoLoggers = Lists.newArrayList();
+		registerLogger(Logger.getLogger(name));
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
+	}
+	
+	/**
+	 * Register logger with the plugin.
+	 */
+	public void registerLogger(Logger logger) {
+		loggers.add(logger);
+	}
+	
+	/**
+	 * Register Primo logger with the plugin.
+	 */
+	public void registerLogger(IPrimoLogger primoLogger) {
+		primoLoggers.add(primoLogger);
 	}
 	
 	/**
@@ -35,7 +56,22 @@ public abstract class NyuPlugin {
 	 * @param msg - error message
 	 */
 	protected void logError(String msg) {
-		logger.severe(formatMsg(msg));
+		for (Logger logger: loggers)
+			logger.severe(formatMsg(msg));
+		for (IPrimoLogger primoLogger: primoLoggers)
+			primoLogger.error(formatMsg(msg));
+	}
+	
+	/**
+	 * Logs errors.
+	 * 
+	 * @param msg - error message
+	 */
+	protected void logError(String msg, Exception e) {
+		for (Logger logger: loggers)
+			logger.severe(formatMsg(msg));
+		for (IPrimoLogger primoLogger: primoLoggers)
+			primoLogger.error(formatMsg(msg), e);
 	}
 	
 	/**
@@ -44,7 +80,10 @@ public abstract class NyuPlugin {
 	 * @param msg - warning message
 	 */
 	protected void logWarning(String msg) {
-		logger.warning(formatMsg(msg));
+		for (Logger logger: loggers)
+			logger.warning(formatMsg(msg));
+		for (IPrimoLogger primoLogger: primoLoggers)
+			primoLogger.warn(formatMsg(msg));
 	}
 	
 	/**
@@ -53,7 +92,10 @@ public abstract class NyuPlugin {
 	 * @param msg - informative message
 	 */
 	protected void logInfo(String msg) {
-		logger.info(formatMsg(msg));
+		for (Logger logger: loggers)
+			logger.info(formatMsg(msg));
+		for (IPrimoLogger primoLogger: primoLoggers)
+			primoLogger.info(formatMsg(msg));
 	}
 	
 	/**

@@ -1,19 +1,18 @@
 /**
  * 
  */
-package edu.nyu.libraries.util;
+package edu.nyu.libraries.primo.plugins.enrichment;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { 
-	DataWarehouseModuleTest.class, 
-	DataWarehouseTest.class })
+	BsnToOclcTest.class })
 
 /**
  * @author Scot Dalton
  *
  */
-public class AllUtilTests {
+public class AllEnrichmentTests {
 }

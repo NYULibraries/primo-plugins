@@ -3,7 +3,6 @@
  */
 package edu.nyu.libraries.primo.plugins.enrichment;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -33,37 +32,16 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	public DataWarehouseEnrichmentPlugin() throws Exception {
 		Injector injector = 
 			Guice.createInjector(new DataWarehouseModule());
-		Connection connection = 
-			injector.getInstance(Connection.class);
-		dataWarehouse = 
-			new DataWarehouse(connection);
+		dataWarehouse = injector.getInstance(DataWarehouse.class);
 	}
 	
 	/**
-	 * Abstract method for more straightforward enrichment plugins.
-	 * Implementers should return a valid SQL statement.
-	 * 
-	 * @return SQL string
-	 */
-	protected abstract String getSqlStatement();
-	
-	/**
-	 * 
-	 * @return ResultSet from the NYU Libraries Data Warehouse
-	 * @throws SQLException
-	 */
-	protected ResultSet getResultSet() throws SQLException {
-		return getResultSet(getSqlStatement());
-	}
-	
-	/**
-	 * Subclasses can use this method for more complex querying needs.
+	 * Subclasses can override this method for more complex querying needs.
 	 * @param sql
 	 * @return
 	 * @throws SQLException
 	 */
 	protected ResultSet getResultSet(String sql) throws SQLException {
-		dataWarehouse.prepareStatement(sql);
-		return dataWarehouse.executePreparedStatement();
+		return dataWarehouse.executeQuery(sql);
 	}
 }
