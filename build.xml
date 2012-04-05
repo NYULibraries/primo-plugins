@@ -38,16 +38,6 @@
     <pathconvert property="manifest.classpath" refid="dist.jars" pathsep=" " /> 
     <jar jarfile="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar" indexMetaInf="true">
       <fileset dir="${build}"/>
-      <manifest>
-        <attribute name="Main-Class" value="edu.nyu.libraries.primo.plugins.Index" />
-        <attribute name="Class-Path" value="${manifest.classpath}" />
-        <section name="edu.nyu.libraries.primo.plugins.Index">
-          <attribute name="Specification-Title" value="Primo Plugin Datawarehouse Properties" />
-          <attribute name="Specification-Version" value="1.0" />
-          <attribute name="Implementation-Title" value="edu.nyu.libraries" />
-          <attribute name="Implementation-Version" value="build-${DSTAMP}" />
-        </section>
-      </manifest>
       <metainf dir="${config}" includes="**/*.properties" />
     </jar>
     <symlink link="${dist}/nyu-libraries-primo-plugins.jar" resource="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar" />
