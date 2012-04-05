@@ -7,11 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 import edu.nyu.libraries.util.DataWarehouse;
-import edu.nyu.libraries.util.DataWarehouseModule;
 
 
 /**
@@ -30,12 +28,11 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	 * Public constructor.
 	 * @throws Exception
 	 */
-	public DataWarehouseEnrichmentPlugin(
-			List<SectionTag> enrichmentSectionTags) throws Exception {
+	@Inject
+	public DataWarehouseEnrichmentPlugin(DataWarehouse dataWarehouse,
+			List<SectionTag> enrichmentSectionTags) {
 		super(enrichmentSectionTags);
-		Injector injector = 
-			Guice.createInjector(new DataWarehouseModule());
-		dataWarehouse = injector.getInstance(DataWarehouse.class);
+		this.dataWarehouse = dataWarehouse;
 	}
 	
 	/**

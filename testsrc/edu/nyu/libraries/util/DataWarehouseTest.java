@@ -34,7 +34,7 @@ public class DataWarehouseTest {
 	public void testIntantiate() 
 			throws SQLException, FileNotFoundException, IOException {
 		Injector injector = 
-			Guice.createInjector(new DataWarehouseModule());
+			Guice.createInjector(new DataWarehouseModule("./META-INF/datawarehouse.properties"));
 		DataWarehouse dataWarehouse = 
 			injector.getInstance(DataWarehouse.class);
 		assertTrue(dataWarehouse instanceof DataWarehouse);
@@ -44,7 +44,7 @@ public class DataWarehouseTest {
 	public void testExecuteQuery_select() 
 			throws FileNotFoundException, IOException, SQLException {
 		Injector injector = 
-			Guice.createInjector(new DataWarehouseModule());
+			Guice.createInjector(new DataWarehouseModule("./META-INF/datawarehouse.properties"));
 		DataWarehouse dataWarehouse = 
 			injector.getInstance(DataWarehouse.class);
 		ResultSet results = dataWarehouse.executeQuery(SQL_SELECT);
@@ -56,8 +56,8 @@ public class DataWarehouseTest {
 	@Test
 	public void testGetActivatedPreparedStatement_select()
 			throws FileNotFoundException, IOException, SQLException {
-		Injector injector = 
-			Guice.createInjector(new DataWarehouseModule());
+		Injector injector = Guice.createInjector(
+			new DataWarehouseModule("./META-INF/datawarehouse.properties"));
 		DataWarehouse dataWarehouse = 
 			injector.getInstance(DataWarehouse.class);
 		dataWarehouse.activatePreparedStatement(SQL_PREPARED_STATEMENT);
@@ -73,8 +73,8 @@ public class DataWarehouseTest {
 	@Test
 	public void testGetResultsFromActivatedPreparedStatement_select() 
 			throws FileNotFoundException, IOException, SQLException {
-		Injector injector = 
-			Guice.createInjector(new DataWarehouseModule());
+		Injector injector = Guice.createInjector(
+			new DataWarehouseModule("./META-INF/datawarehouse.properties"));
 		DataWarehouse dataWarehouse = 
 			injector.getInstance(DataWarehouse.class);
 		dataWarehouse.activatePreparedStatement(SQL_PREPARED_STATEMENT);

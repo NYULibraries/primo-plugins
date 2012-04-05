@@ -3,13 +3,13 @@
  */
 package edu.nyu.libraries.util;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import com.google.inject.AbstractModule;
@@ -22,27 +22,28 @@ import com.microsoft.sqlserver.jdbc.SQLServerDriver;
  *
  */
 public class DataWarehouseModule extends AbstractModule {
-	private final static String PROPERTIES_FILE_NAME = 
-		"./META-INF/datawarehouse.properties";
-	private Properties properties;
+	private final static String PROPERTIES_RESOURCE = 
+		"META-INF/datawarehouse.properties";
 	private Driver driver;
 	private String connectionURL;
 	private String username;
 	private String password;
+	private InputStream inputStream;
 
-	public DataWarehouseModule() throws FileNotFoundException, IOException {
-		this(PROPERTIES_FILE_NAME);
+	public DataWarehouseModule() {
+		super();
+		inputStream = 
+			ClassLoader.getSystemClassLoader().
+				getResourceAsStream(PROPERTIES_RESOURCE);
 	}
-
-	public DataWarehouseModule(String propertiesFileName) 
-		throws FileNotFoundException, IOException {
-			super();
-			properties = new Properties();
-			properties.load(new FileReader(propertiesFileName));
-			driver = new SQLServerDriver();
-			connectionURL = properties.getProperty("connectionURL");
-			username = properties.getProperty("username");
-			password = properties.getProperty("password");
+	
+	public DataWarehouseModule(String propertiesFileName) {
+		super();
+		try {
+			inputStream = new FileInputStream(propertiesFileName);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -53,13 +54,23 @@ public class DataWarehouseModule extends AbstractModule {
 	DataWarehouse provideDataWarehouse() {
 		DataWarehouse dataWarehouse = null;
 		try {
+			setFields();
 			DriverManager.registerDriver(driver);
 			Connection connection = 
 				DriverManager.getConnection(connectionURL, username, password);
 			dataWarehouse = new DataWarehouse(connection);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			addError(e);
 		}
 		return dataWarehouse;
+	}
+	
+	private void setFields() throws IOException {
+		Properties properties = new Properties();
+		properties.load(inputStream);
+		driver = new SQLServerDriver();
+		connectionURL = properties.getProperty("connectionURL");
+		username = properties.getProperty("username");
+		password = properties.getProperty("password");
 	}
 }

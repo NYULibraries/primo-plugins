@@ -13,7 +13,6 @@ import com.exlibris.primo.api.common.IMappingTablesFetcher;
 import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.EnrichmentPlugin;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
-import com.google.common.collect.Lists;
 
 import edu.nyu.libraries.primo.plugins.NyuPlugin;
 
@@ -29,10 +28,6 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 	private IMappingTablesFetcher tablesFetcher;
 	private Map<String, Object> paramsMap;
 	private final List<SectionTag> enrichmentSectionTags;
-
-	protected final static List<SectionTag> enrichmentSectionTags(SectionTag... sectionTags) {
-		return Lists.newArrayList(sectionTags);
-	}
 
 	/**
 	 * Public constructor for NYU Enrichments.

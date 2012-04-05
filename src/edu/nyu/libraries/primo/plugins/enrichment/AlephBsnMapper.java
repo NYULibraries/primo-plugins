@@ -3,8 +3,6 @@
  */
 package edu.nyu.libraries.primo.plugins.enrichment;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +12,8 @@ import org.w3c.dom.Document;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Lists;
 
+import edu.nyu.libraries.util.DataWarehouse;
+
 
 /**
  * @author Scot Dalton
@@ -22,39 +22,22 @@ import com.google.common.collect.Lists;
 public abstract class AlephBsnMapper extends DataWarehouseEnrichmentPlugin {
 	private final String sqlQuery;
 
-	private final static String sqlQuery(String tableName, 
-			String mappingColumnName,  String bsnColumnName) 
-			throws FileNotFoundException, IOException {
-		if (	tableName == null) 
-			throw new NullPointerException(
-				"No property 'table' defined.");
-		if (	mappingColumnName == null) 
-			throw new NullPointerException(
-				"No property 'column' defined.");
-		if (	bsnColumnName == null) 
-			throw new NullPointerException(
-				"No property 'bsnColumn' defined.");
-		return "SELECT " + mappingColumnName + " FROM " + tableName + 
-			" WHERE " + bsnColumnName + " = ";
-	}
-
 	/**
 	 * @throws Exception
 	 */
 	public AlephBsnMapper(String tableName, String mappingColumnName, 
-			String bsnColumnName, List<SectionTag> enrichmentSectionTags) 
-			throws Exception {
-		this(
-			sqlQuery(tableName, mappingColumnName, bsnColumnName), 
-			enrichmentSectionTags);
+			String bsnColumnName, DataWarehouse dataWarehouse, 
+			List<SectionTag> enrichmentSectionTags) {
+		this(sqlQuery(tableName, mappingColumnName, bsnColumnName), 
+			dataWarehouse, enrichmentSectionTags);
 	}
 	
 	/**
 	 * @throws Exception
 	 */
-	public AlephBsnMapper(String sqlQuery, 
-			List<SectionTag> enrichmentSectionTags) throws Exception {
-		super(enrichmentSectionTags);
+	public AlephBsnMapper(String sqlQuery, DataWarehouse dataWarehouse, 
+			List<SectionTag> enrichmentSectionTags) {
+		super(dataWarehouse, enrichmentSectionTags);
 		this.sqlQuery = sqlQuery;
 	}
 	
@@ -80,8 +63,26 @@ public abstract class AlephBsnMapper extends DataWarehouseEnrichmentPlugin {
 		return addEnrichmentTags(doc, docUtil, mappings);
 	}
 	
+	/**
+	 * Get Result set based on the initial SQL query and the given BSN.
+	 */
 	@Override
 	public ResultSet getResultSet(String bsn) throws SQLException {
 		return super.getResultSet(sqlQuery + bsn);
+	}
+
+	private final static String sqlQuery(String tableName, 
+			String mappingColumnName,  String bsnColumnName) {
+		if (	tableName == null) 
+			throw new NullPointerException(
+				"No property 'table' defined.");
+		if (	mappingColumnName == null) 
+			throw new NullPointerException(
+				"No property 'column' defined.");
+		if (	bsnColumnName == null) 
+			throw new NullPointerException(
+				"No property 'bsnColumn' defined.");
+		return "SELECT " + mappingColumnName + " FROM " + tableName + 
+			" WHERE " + bsnColumnName + " = ";
 	}
 }

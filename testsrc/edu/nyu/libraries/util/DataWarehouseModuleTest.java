@@ -26,7 +26,8 @@ public class DataWarehouseModuleTest {
 	
 	@Before
 	public void setup() throws FileNotFoundException, IOException {
-		injector = Guice.createInjector(new DataWarehouseModule());
+		injector = Guice.createInjector(
+			new DataWarehouseModule("./META-INF/datawarehouse.properties"));
 	}
 	
 	@Test
