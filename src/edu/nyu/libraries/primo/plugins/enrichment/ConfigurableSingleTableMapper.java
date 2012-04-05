@@ -13,66 +13,72 @@ import com.exlibris.primo.api.common.IMappingTablesFetcher;
 import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Lists;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 import edu.nyu.libraries.util.DataWarehouse;
-import edu.nyu.libraries.util.DataWarehouseModule;
 
 /**
  * @author Scot Dalton
  *
  */
-public class ConfigurableSingleTableMapper extends DataWarehouseEnrichmentPlugin {
-
-	private static Injector injector = 
-		Guice.createInjector(new DataWarehouseModule());
+public class ConfigurableSingleTableMapper extends NyuEnrichmentPlugin {
 	private SingleTableMapper singleTableMapper;
-	
-	/**
-	 * Public constructor.
-	 */
-	public ConfigurableSingleTableMapper() {
-		this(injector.getInstance(DataWarehouse.class));
-	}
-
-	/**
-	 * Protected constructor. Used for testing.
-	 * @param dataWarehouse
-	 */
-	protected ConfigurableSingleTableMapper(DataWarehouse dataWarehouse) {
-		super(injector.getInstance(DataWarehouse.class), null);
-	}
+	private String mappingTableName;
+	private String mapToColumn;
+	private String mapFromColumn;
+	private String mapFromSection;
+	private String mapFromTag;
+	private SectionTag mapFromSectionTag;
+	private int numberOfEnrichmentTags;
+	private List<SectionTag> enrichmentSectionTag;
 	
 	@Override
 	public void init(IPrimoLogger primoLogger, 
 			IMappingTablesFetcher tablesFetcher, 
 			Map<String, Object> paramsMap) throws Exception {
 		super.init(primoLogger, tablesFetcher, paramsMap);
-		String mappingTableName = (String) paramsMap.get("mappingTable");
-		String mapToColumn = (String) paramsMap.get("mapToColumn");
-		String mapFromColumn = (String) paramsMap.get("mapFromColumn");
-		String mapFromSection = (String) paramsMap.get("mapFromSection");
-		String mapFromTag = (String) paramsMap.get("mapFromTag");
-		SectionTag mapFromSectionTag = 
+		setMappingConfig(paramsMap);
+		singleTableMapper = new SingleTableMapper(mappingTableName, 
+			mapToColumn, mapFromColumn, mapFromSectionTag, enrichmentSectionTag);
+	}
+	
+	/**
+	 * Protected init. Used for testing.
+	 * @param primoLogger
+	 * @param tablesFetcher
+	 * @param paramsMap
+	 * @param dataWarehouse
+	 * @throws Exception
+	 */
+	protected void init(IPrimoLogger primoLogger, 
+			IMappingTablesFetcher tablesFetcher, 
+			Map<String, Object> paramsMap, DataWarehouse dataWarehouse) throws Exception {
+		super.init(primoLogger, tablesFetcher, paramsMap);
+		setMappingConfig(paramsMap);
+		singleTableMapper = new SingleTableMapper(mappingTableName, 
+			mapToColumn, mapFromColumn, mapFromSectionTag, dataWarehouse, enrichmentSectionTag);
+	}
+	
+	@Override
+	public Document enrich(Document doc, IEnrichmentDocUtils docUtils)
+			throws Exception {
+		return singleTableMapper.enrich(doc, docUtils);
+	}
+	
+	private void setMappingConfig(Map<String, Object> paramsMap) {
+		mappingTableName = (String) paramsMap.get("mappingTable");
+		mapToColumn = (String) paramsMap.get("mapToColumn");
+		mapFromColumn = (String) paramsMap.get("mapFromColumn");
+		mapFromSection = (String) paramsMap.get("mapFromSection");
+		mapFromTag = (String) paramsMap.get("mapFromTag");
+		mapFromSectionTag = 
 			new SectionTag(mapFromSection, mapFromTag);
-		int numberOfEnrichmentTags = 
+		numberOfEnrichmentTags = 
 			Integer.valueOf((String) paramsMap.get("numberOfEnrichmentTags"));
-		List<SectionTag> enrichmentSectionTag = Lists.newArrayList();
+		enrichmentSectionTag = Lists.newArrayList();
 		for(int i=1; i<=numberOfEnrichmentTags; i++){
 			String section = (String) paramsMap.get("enrichmentSection"+i);
 			String tag = (String) paramsMap.get("enrichmentTag"+i);
 			enrichmentSectionTag.add(new SectionTag(section, tag));
 		}
-		singleTableMapper = new SingleTableMapper(mappingTableName, 
-			mapToColumn, mapFromColumn, mapFromSectionTag, 
-			getDataWarehouse(), enrichmentSectionTag);
-	}
-	
-
-	@Override
-	public Document enrich(Document doc, IEnrichmentDocUtils docUtils)
-			throws Exception {
-		return singleTableMapper.enrich(doc, docUtils);
 	}
 }

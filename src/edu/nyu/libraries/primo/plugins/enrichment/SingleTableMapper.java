@@ -11,8 +11,11 @@ import org.w3c.dom.Document;
 
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Lists;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import edu.nyu.libraries.util.DataWarehouse;
+import edu.nyu.libraries.util.DataWarehouseModule;
 
 /**
  * @author Scot Dalton
@@ -21,15 +24,38 @@ import edu.nyu.libraries.util.DataWarehouse;
  * DataWarehouse.
  */
 public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
+	private static Injector injector = 
+		Guice.createInjector(new DataWarehouseModule());
+
 	private SectionTag mapFromSectionTag;
 	private final String sqlQuery;
 
 	/**
-	 * Public constructor.
-	 * @param dataWarehouse
+	 * Public Constructor.
+	 * @param mappingTableName
+	 * @param mappedToColumnName
+	 * @param mappedFromColumnName
+	 * @param mapFromSectionTag
 	 * @param enrichmentSectionTags
 	 */
 	public SingleTableMapper(String mappingTableName, String mappedToColumnName, 
+			String mappedFromColumnName, SectionTag mapFromSectionTag, 
+			List<SectionTag> enrichmentSectionTags) {
+		this(sqlQuery(mappingTableName, mappedToColumnName, mappedFromColumnName), 
+				mapFromSectionTag, injector.getInstance(DataWarehouse.class),
+					enrichmentSectionTags);
+	}
+
+	/**
+	 * Protected constructor. Used for testing.
+	 * @param mappingTableName
+	 * @param mappedToColumnName
+	 * @param mappedFromColumnName
+	 * @param mapFromSectionTag
+	 * @param dataWarehouse
+	 * @param enrichmentSectionTags
+	 */
+	protected SingleTableMapper(String mappingTableName, String mappedToColumnName, 
 			String mappedFromColumnName, SectionTag mapFromSectionTag, 
 			DataWarehouse dataWarehouse, List<SectionTag> enrichmentSectionTags) {
 		this(sqlQuery(mappingTableName, mappedToColumnName, mappedFromColumnName), 
@@ -39,10 +65,22 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	/**
 	 * Public constructor.
 	 * @param sqlQuery
-	 * @param dataWarehouse
+	 * @param mapFromSectionTag
 	 * @param enrichmentSectionTags
 	 */
 	public SingleTableMapper(String sqlQuery, SectionTag mapFromSectionTag, 
+			List<SectionTag> enrichmentSectionTags) {
+		this(sqlQuery, mapFromSectionTag, 
+			injector.getInstance(DataWarehouse.class), enrichmentSectionTags);
+	}
+
+	/**
+	 * Protected constructor. Used for testing.
+	 * @param sqlQuery
+	 * @param dataWarehouse
+	 * @param enrichmentSectionTags
+	 */
+	protected SingleTableMapper(String sqlQuery, SectionTag mapFromSectionTag, 
 			DataWarehouse dataWarehouse, List<SectionTag> enrichmentSectionTags) {
 		super(dataWarehouse, enrichmentSectionTags);
 		this.sqlQuery = sqlQuery;
