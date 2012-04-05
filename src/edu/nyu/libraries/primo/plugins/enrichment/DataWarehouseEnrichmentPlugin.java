@@ -6,11 +6,8 @@ package edu.nyu.libraries.primo.plugins.enrichment;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import com.google.inject.Inject;
-
 import edu.nyu.libraries.util.DataWarehouse;
-
 
 /**
  * @author Scot Dalton
@@ -26,16 +23,17 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	
 	/**
 	 * Public constructor.
-	 * @throws Exception
+	 * @param dataWarehouse
 	 */
 	@Inject
 	public DataWarehouseEnrichmentPlugin(DataWarehouse dataWarehouse) {
 		this(dataWarehouse, null);
 	}
-	
+
 	/**
 	 * Public constructor.
-	 * @throws Exception
+	 * @param dataWarehouse
+	 * @param enrichmentSectionTags
 	 */
 	@Inject
 	public DataWarehouseEnrichmentPlugin(DataWarehouse dataWarehouse,
@@ -43,7 +41,7 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 		super(enrichmentSectionTags);
 		this.dataWarehouse = dataWarehouse;
 	}
-	
+
 	/**
 	 * Subclasses can override this method for more complex querying needs.
 	 * @param sql
@@ -53,7 +51,12 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	protected ResultSet getResultSet(String sql) throws SQLException {
 		return dataWarehouse.executeQuery(sql);
 	}
-	
+
+	/**
+	 * Returns the instance of DataWarehouse associated with the 
+	 * DataWarehouseEnrichmentPlugin.
+	 * @return
+	 */
 	protected DataWarehouse getDataWarehouse() {
 		return dataWarehouse;
 	}

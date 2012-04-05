@@ -31,7 +31,6 @@ public class BsnToOclcMapper extends AlephBsnMapper {
 
 	/**
 	 * Public constructor.
-	 * 
 	 * @throws Exception
 	 */
 	public BsnToOclcMapper() {

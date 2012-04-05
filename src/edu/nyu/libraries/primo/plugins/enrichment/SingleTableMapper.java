@@ -25,6 +25,7 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	private final String sqlQuery;
 
 	/**
+	 * Public constructor.
 	 * @param dataWarehouse
 	 * @param enrichmentSectionTags
 	 */
@@ -36,7 +37,7 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	}
 
 	/**
-	 * 
+	 * Public constructor.
 	 * @param sqlQuery
 	 * @param dataWarehouse
 	 * @param enrichmentSectionTags
@@ -47,6 +48,7 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 		this.sqlQuery = sqlQuery;
 		this.mapFromSectionTag = mapFromSectionTag;
 	}
+
 	/**
 	 * Adds mappings provided by the NYU Libraries' Aleph DataWarehouse 
 	 * from Aleph BSNs to result of the first column in the plugins' 

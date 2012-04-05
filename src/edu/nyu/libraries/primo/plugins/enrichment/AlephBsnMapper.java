@@ -17,7 +17,12 @@ public class AlephBsnMapper extends SingleTableMapper {
 		new SectionTag("control", "sourcerecordid");
 
 	/**
-	 * @throws Exception
+	 * 
+	 * @param mappingTableName
+	 * @param mapToColumnName
+	 * @param bsnColumnName
+	 * @param dataWarehouse
+	 * @param enrichmentSectionTags
 	 */
 	public AlephBsnMapper(String mappingTableName, String mapToColumnName, 
 			String bsnColumnName, DataWarehouse dataWarehouse, 

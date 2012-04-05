@@ -23,6 +23,10 @@ public class DataWarehouse {
 	private Map<String, PreparedStatement> preparedStatements;
 	private PreparedStatement activePreparedStatement;
 	
+	/**
+	 * Public constructor.
+	 * @param connection
+	 */
 	public DataWarehouse(Connection connection) {
 		this.connection = connection;
 		preparedStatements = Maps.newHashMap();

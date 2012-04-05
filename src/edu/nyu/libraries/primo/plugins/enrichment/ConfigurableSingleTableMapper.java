@@ -23,22 +23,24 @@ import edu.nyu.libraries.util.DataWarehouseModule;
  * @author Scot Dalton
  *
  */
-public class ConfigurableSingleTableMapper extends
-		DataWarehouseEnrichmentPlugin {
+public class ConfigurableSingleTableMapper extends DataWarehouseEnrichmentPlugin {
 
 	private static Injector injector = 
 		Guice.createInjector(new DataWarehouseModule());
 	private SingleTableMapper singleTableMapper;
 	
+	/**
+	 * Public constructor.
+	 */
 	public ConfigurableSingleTableMapper() {
 		this(injector.getInstance(DataWarehouse.class));
 	}
 
 	/**
+	 * Protected constructor. Used for testing.
 	 * @param dataWarehouse
-	 * @param enrichmentSectionTags
 	 */
-	public ConfigurableSingleTableMapper(DataWarehouse dataWarehouse) {
+	protected ConfigurableSingleTableMapper(DataWarehouse dataWarehouse) {
 		super(injector.getInstance(DataWarehouse.class), null);
 	}
 	

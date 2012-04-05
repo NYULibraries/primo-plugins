@@ -59,7 +59,6 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 	
 	/**
 	 * Logs the exception and returns false.
-	 * 
 	 * @see com.exlibris.primo.api.plugins.enrichment.EnrichmentPlugin#
 	 * shouldSkipFailedRecord(org.w3c.dom.Document, java.lang.Exception)
 	 */
@@ -71,6 +70,14 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 		return false;
 	}
 	
+	/**
+	 * Adds the given values to the Primo document and returns the 
+	 * document.
+	 * @param doc
+	 * @param docUtil
+	 * @param values
+	 * @return
+	 */
 	protected Document addEnrichmentTags(Document doc, 
 			IEnrichmentDocUtils docUtil, List<String> values) {
 		for(SectionTag sectionTag: enrichmentSectionTags)
