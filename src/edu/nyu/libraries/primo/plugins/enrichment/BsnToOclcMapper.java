@@ -39,7 +39,6 @@ public class BsnToOclcMapper extends AlephBsnMapper {
 
 	/**
 	 * Protected constructor. Used for testing. 
-	 * 
 	 * @throws Exception
 	 */
 	protected BsnToOclcMapper(DataWarehouse dataWarehouse) {

@@ -79,44 +79,44 @@ public class SingleTableMapperTest {
 	 */
 	@Test
 	public void testNew() {
-		SingleTableMapper bsnToOclc = 
+		SingleTableMapper stm = 
 			new SingleTableMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, mapFromSectionTag, dataWarehouse, 
 					enrichmentSectionTags);
-		assertNotNull(bsnToOclc);
+		assertNotNull(stm);
 	}
 	
 	@Test
 	public void testInit() throws Exception {
-		SingleTableMapper bsnToOclc = 
+		SingleTableMapper stm = 
 			new SingleTableMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, mapFromSectionTag, dataWarehouse, 
 					enrichmentSectionTags);
-		bsnToOclc.init(primoLogger, mappingTableFetcher, 
+		stm.init(primoLogger, mappingTableFetcher, 
 			enrichmentPluginParams);
 	}
 	
 	@Test
 	public void testGetResultSet() throws Exception {
-		SingleTableMapper bsnToOclc = 
+		SingleTableMapper stm = 
 			new SingleTableMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, mapFromSectionTag, dataWarehouse, 
 					enrichmentSectionTags);
-		ResultSet resultSet = bsnToOclc.getResultSet("001969478");
+		ResultSet resultSet = stm.getResultSet("001969478");
 		resultSet.next();
 		assertEquals("22983279", resultSet.getString(1));
 	}
 	
 	@Test
 	public void testEnrich() throws Exception {
-		SingleTableMapper bsnToOclc = 
+		SingleTableMapper stm = 
 			new SingleTableMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, mapFromSectionTag, dataWarehouse, 
 					enrichmentSectionTags);
-		bsnToOclc.init(primoLogger, mappingTableFetcher, enrichmentPluginParams);
+		stm.init(primoLogger, mappingTableFetcher, enrichmentPluginParams);
 		assertNotNull(doc.getElementsByTagName("isbn").item(0));
 		assertNull(doc.getElementsByTagName("oclcid").item(0));
-		bsnToOclc.enrich(doc, enrichmentDocUtils);
+		stm.enrich(doc, enrichmentDocUtils);
 		assertNotNull(doc.getElementsByTagName("oclcid").item(0));
 		assertEquals("22983279", 
 			doc.getElementsByTagName("oclcid").item(0).getTextContent());

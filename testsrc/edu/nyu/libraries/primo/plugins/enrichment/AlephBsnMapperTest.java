@@ -77,44 +77,44 @@ public class AlephBsnMapperTest {
 	 */
 	@Test
 	public void testNew() {
-		AlephBsnMapper bsnToOclc = 
+		AlephBsnMapper abm = 
 			new AlephBsnMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, dataWarehouse, 
 					enrichmentSectionTags);
-		assertNotNull(bsnToOclc);
+		assertNotNull(abm);
 	}
 	
 	@Test
 	public void testInit() throws Exception {
-		AlephBsnMapper bsnToOclc = 
+		AlephBsnMapper abm = 
 			new AlephBsnMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, dataWarehouse, 
 					enrichmentSectionTags);
-		bsnToOclc.init(primoLogger, mappingTableFetcher, 
+		abm.init(primoLogger, mappingTableFetcher, 
 			enrichmentPluginParams);
 	}
 	
 	@Test
 	public void testGetResultSet() throws Exception {
-		AlephBsnMapper bsnToOclc = 
+		AlephBsnMapper abm = 
 			new AlephBsnMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, dataWarehouse, 
 					enrichmentSectionTags);
-		ResultSet resultSet = bsnToOclc.getResultSet("001969478");
+		ResultSet resultSet = abm.getResultSet("001969478");
 		resultSet.next();
 		assertEquals("22983279", resultSet.getString(1));
 	}
 	
 	@Test
 	public void testEnrich() throws Exception {
-		AlephBsnMapper bsnToOclc = 
+		AlephBsnMapper abm = 
 			new AlephBsnMapper(mappingTableName, mapToColumnName, 
 				mapFromColumnName, dataWarehouse, 
 					enrichmentSectionTags);
-		bsnToOclc.init(primoLogger, mappingTableFetcher, enrichmentPluginParams);
+		abm.init(primoLogger, mappingTableFetcher, enrichmentPluginParams);
 		assertNotNull(doc.getElementsByTagName("isbn").item(0));
 		assertNull(doc.getElementsByTagName("oclcid").item(0));
-		bsnToOclc.enrich(doc, enrichmentDocUtils);
+		abm.enrich(doc, enrichmentDocUtils);
 		assertNotNull(doc.getElementsByTagName("oclcid").item(0));
 		assertEquals("22983279", 
 			doc.getElementsByTagName("oclcid").item(0).getTextContent());

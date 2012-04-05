@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses( {
 	AlephBsnMapperTest.class,
 	BsnToOclcMapperTest.class,
+	ConfigurableSingleTableMapperTest.class,
 	SingleTableMapperTest.class
 	})
 
