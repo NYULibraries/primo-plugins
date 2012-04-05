@@ -68,9 +68,6 @@ public class ConfigurableSingleTableMapper extends
 	}
 	
 
-	/* (non-Javadoc)
-	 * @see com.exlibris.primo.api.plugins.enrichment.EnrichmentPlugin#enrich(org.w3c.dom.Document, com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils)
-	 */
 	@Override
 	public Document enrich(Document doc, IEnrichmentDocUtils docUtils)
 			throws Exception {
