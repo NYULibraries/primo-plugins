@@ -22,25 +22,33 @@ import com.google.common.collect.Lists;
 public abstract class AlephBsnMapper extends DataWarehouseEnrichmentPlugin {
 	private final String sqlQuery;
 
-	protected final static String sqlQuery(String table, String column,  
-			String bsnColumn) throws FileNotFoundException, IOException {
-		if (	table == null) 
+	private final static String sqlQuery(String tableName, 
+			String mappingColumnName,  String bsnColumnName) 
+			throws FileNotFoundException, IOException {
+		if (	tableName == null) 
 			throw new NullPointerException(
 				"No property 'table' defined.");
-		if (	column == null) 
+		if (	mappingColumnName == null) 
 			throw new NullPointerException(
 				"No property 'column' defined.");
-		if (	bsnColumn == null) 
+		if (	bsnColumnName == null) 
 			throw new NullPointerException(
 				"No property 'bsnColumn' defined.");
-		return "SELECT " + column + " FROM " + table + 
-			" WHERE " + bsnColumn + " = ";
-}
+		return "SELECT " + mappingColumnName + " FROM " + tableName + 
+			" WHERE " + bsnColumnName + " = ";
+	}
 
-protected final static List<SectionTag> enrichmentSectionTags(SectionTag... sectionTags) {
-return Lists.newArrayList(sectionTags);
-}
-
+	/**
+	 * @throws Exception
+	 */
+	public AlephBsnMapper(String tableName, String mappingColumnName, 
+			String bsnColumnName, List<SectionTag> enrichmentSectionTags) 
+			throws Exception {
+		this(
+			sqlQuery(tableName, mappingColumnName, bsnColumnName), 
+			enrichmentSectionTags);
+	}
+	
 	/**
 	 * @throws Exception
 	 */
