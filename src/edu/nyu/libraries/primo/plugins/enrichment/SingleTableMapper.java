@@ -54,9 +54,9 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	 * the plugins' List of SectionTags.
 	 */
 	@Override
-	public Document enrich(Document doc, IEnrichmentDocUtils docUtil) 
+	public Document enrich(Document doc, IEnrichmentDocUtils docUtils) 
 			throws Exception {
-		String[] mapFromTags = docUtil.
+		String[] mapFromTags = docUtils.
 			getValuesBySectionAndTag(doc, mapFromSectionTag.section, mapFromSectionTag.tag);
 		List<String> mappings = Lists.newArrayList();
 		for (String mapFromTag: mapFromTags) {
@@ -66,7 +66,7 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 				mappings.add(resultSet.getString(1));
 			}
 		}
-		return addEnrichmentTags(doc, docUtil, mappings);
+		return addEnrichmentTags(doc, docUtils, mappings);
 	}
 	
 	/**

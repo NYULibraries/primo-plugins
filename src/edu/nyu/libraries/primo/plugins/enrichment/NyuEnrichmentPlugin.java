@@ -32,6 +32,13 @@ public abstract class NyuEnrichmentPlugin extends NyuPlugin implements Enrichmen
 	/**
 	 * Public constructor for NYU Enrichments.
 	 */
+	public NyuEnrichmentPlugin() {
+		this(null);
+	}
+	
+	/**
+	 * Public constructor for NYU Enrichments.
+	 */
 	public NyuEnrichmentPlugin(List<SectionTag> enrichmentSectionTags) {
 		super("NyuEnrichments");
 		this.enrichmentSectionTags = enrichmentSectionTags;

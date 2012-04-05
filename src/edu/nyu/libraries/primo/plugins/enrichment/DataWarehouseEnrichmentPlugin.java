@@ -29,6 +29,15 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	 * @throws Exception
 	 */
 	@Inject
+	public DataWarehouseEnrichmentPlugin(DataWarehouse dataWarehouse) {
+		this(dataWarehouse, null);
+	}
+	
+	/**
+	 * Public constructor.
+	 * @throws Exception
+	 */
+	@Inject
 	public DataWarehouseEnrichmentPlugin(DataWarehouse dataWarehouse,
 			List<SectionTag> enrichmentSectionTags) {
 		super(enrichmentSectionTags);
@@ -43,5 +52,9 @@ public abstract class DataWarehouseEnrichmentPlugin extends NyuEnrichmentPlugin 
 	 */
 	protected ResultSet getResultSet(String sql) throws SQLException {
 		return dataWarehouse.executeQuery(sql);
+	}
+	
+	protected DataWarehouse getDataWarehouse() {
+		return dataWarehouse;
 	}
 }
