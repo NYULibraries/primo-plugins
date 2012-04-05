@@ -1,3 +1,4 @@
+driverClass: com.microsoft.sqlserver.jdbc.SQLServerDriver
 connectionURL: jdbc:sqlserver://localhost\\instance:1433;databaseName=database;selectMethod=cursor
 username: user
 password: ******

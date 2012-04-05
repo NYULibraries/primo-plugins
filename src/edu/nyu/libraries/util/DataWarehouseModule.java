@@ -5,7 +5,6 @@ package edu.nyu.libraries.util;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -15,7 +14,6 @@ import java.util.Properties;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 /**
  * @author Scot Dalton
@@ -65,10 +63,11 @@ public class DataWarehouseModule extends AbstractModule {
 		return dataWarehouse;
 	}
 	
-	private void setFields() throws IOException {
+	private void setFields() throws Exception {
 		Properties properties = new Properties();
 		properties.load(inputStream);
-		driver = new SQLServerDriver();
+		driver = (Driver) Class.
+			forName(properties.getProperty("driverClass")).newInstance();
 		connectionURL = properties.getProperty("connectionURL");
 		username = properties.getProperty("username");
 		password = properties.getProperty("password");
