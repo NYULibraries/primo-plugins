@@ -1,12 +1,10 @@
 Primo plugins are hooks into Primo to extend functionality.  Currently
-we have only one Primo enrichment plugin built that adds OCLC IDs into
-the Primo document based on a mapping of Aleph bibliographic
-system numbers (BSNs) from the NYU Libraries' Aleph DataWarehouse.
+NYU has one only implemented Primo enrichment plugin that adds OCLC IDs 
+into the Primo document based on a mapping from Aleph bibliographic system 
+numbers (BSNs) stored in the NYU Libraries' Aleph DataWarehouse.
 
-In order to build a jar, you must first configure the
-META-INF/datawarehouse.properties file.  A sample 
-properties files is included at META-INF/datawarehouse.properties.tml.
-After configuring the DataWarehouse properties you can then run ant to
-create the jar. 
-  shell$ ant
-Your jar is now in the dist directory.
+In order to build a jar, the META-INF/datawarehouse.properties file must 
+be configured.  A sample properties files is included at 
+META-INF/datawarehouse.properties.tml. After configuring the DataWarehouse 
+properties ant can be run to create the jar. The jar is now in the dist 
+directory.

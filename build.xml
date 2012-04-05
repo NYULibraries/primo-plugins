@@ -34,8 +34,6 @@
   </target>
   
   <target name="jar" depends="compile" description="Generate the distribution.">
-    <fileset dir="${dist}/lib" id="dist.jars" includes="**/*.jar" />
-    <pathconvert property="manifest.classpath" refid="dist.jars" pathsep=" " /> 
     <jar jarfile="${dist}/lib/nyu-libraries-primo-plugins-${DSTAMP}.jar" indexMetaInf="true">
       <fileset dir="${build}"/>
       <metainf dir="${config}" includes="**/*.properties" />
