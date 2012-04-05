@@ -8,3 +8,7 @@ be configured.  A sample properties files is included at
 META-INF/datawarehouse.properties.tml. After configuring the DataWarehouse 
 properties ant can be run to create the jar. The jar is now in the dist 
 directory.
+
+Summary:
+1. Configure META-INF/datawarehouse.properties
+2. $ ant
