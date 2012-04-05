@@ -13,16 +13,16 @@ import edu.nyu.libraries.util.DataWarehouse;
  *
  */
 public class AlephBsnMapper extends SingleTableMapper {
-	private final static SectionTag mapperSectionTag = 
+	private final static SectionTag mapFromSectionTag = 
 		new SectionTag("control", "sourcerecordid");
 
 	/**
 	 * @throws Exception
 	 */
-	public AlephBsnMapper(String tableName, String mappingColumnName, 
+	public AlephBsnMapper(String mappingTableName, String mapToColumnName, 
 			String bsnColumnName, DataWarehouse dataWarehouse, 
 			List<SectionTag> enrichmentSectionTags) {
-		super(tableName, mappingColumnName, bsnColumnName, 
-			mapperSectionTag, dataWarehouse, enrichmentSectionTags);
+		super(mappingTableName, mapToColumnName, bsnColumnName, 
+			mapFromSectionTag, dataWarehouse, enrichmentSectionTags);
 	}
 }

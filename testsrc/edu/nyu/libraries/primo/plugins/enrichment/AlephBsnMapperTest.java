@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,6 +23,7 @@ import org.w3c.dom.Document;
 import com.exlibris.primo.api.common.IMappingTablesFetcher;
 import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 
@@ -31,18 +33,21 @@ import edu.nyu.libraries.primo.test.util.PrimoLogger;
 import edu.nyu.libraries.util.DataWarehouse;
 import edu.nyu.libraries.util.DataWarehouseModule;
 
-
 /**
  * @author Scot Dalton
  *
  */
-public class BsnToOclcTest {
+public class AlephBsnMapperTest {
 	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher mappingTableFetcher;
 	private Map<String, Object> enrichmentPluginParams;
 	private IEnrichmentDocUtils enrichmentDocUtils;
 	private Document doc;
 	private DataWarehouse dataWarehouse;
+	private String mappingTableName;
+	private String mapToColumnName;
+	private String mapFromColumnName;
+	private List<SectionTag> enrichmentSectionTags;
 	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
@@ -58,6 +63,12 @@ public class BsnToOclcTest {
 		dataWarehouse = Guice.createInjector(
 			new DataWarehouseModule("./META-INF/datawarehouse.properties")).
 				getInstance(DataWarehouse.class);
+		mappingTableName = "HARVARD_PROJECT_OCLC_KEYS";
+		mapToColumnName = "OCLC_MASTER";
+		mapFromColumnName = "ALEPH_BSN";
+		enrichmentSectionTags = Lists.newArrayList(
+			new SectionTag("addata", "oclcid"), 
+			new SectionTag("search", "oclc"));
 	}
 
 	/**
@@ -66,20 +77,29 @@ public class BsnToOclcTest {
 	 */
 	@Test
 	public void testNew() {
-		BsnToOclc bsnToOclc = new BsnToOclc(dataWarehouse);
+		AlephBsnMapper bsnToOclc = 
+			new AlephBsnMapper(mappingTableName, mapToColumnName, 
+				mapFromColumnName, dataWarehouse, 
+					enrichmentSectionTags);
 		assertNotNull(bsnToOclc);
 	}
 	
 	@Test
 	public void testInit() throws Exception {
-		BsnToOclc bsnToOclc = new BsnToOclc(dataWarehouse);
+		AlephBsnMapper bsnToOclc = 
+			new AlephBsnMapper(mappingTableName, mapToColumnName, 
+				mapFromColumnName, dataWarehouse, 
+					enrichmentSectionTags);
 		bsnToOclc.init(primoLogger, mappingTableFetcher, 
 			enrichmentPluginParams);
 	}
 	
 	@Test
 	public void testGetResultSet() throws Exception {
-		BsnToOclc bsnToOclc = new BsnToOclc(dataWarehouse);
+		AlephBsnMapper bsnToOclc = 
+			new AlephBsnMapper(mappingTableName, mapToColumnName, 
+				mapFromColumnName, dataWarehouse, 
+					enrichmentSectionTags);
 		ResultSet resultSet = bsnToOclc.getResultSet("001969478");
 		resultSet.next();
 		assertEquals("22983279", resultSet.getString(1));
@@ -87,7 +107,10 @@ public class BsnToOclcTest {
 	
 	@Test
 	public void testEnrich() throws Exception {
-		BsnToOclc bsnToOclc = new BsnToOclc(dataWarehouse);
+		AlephBsnMapper bsnToOclc = 
+			new AlephBsnMapper(mappingTableName, mapToColumnName, 
+				mapFromColumnName, dataWarehouse, 
+					enrichmentSectionTags);
 		bsnToOclc.init(primoLogger, mappingTableFetcher, enrichmentPluginParams);
 		assertNotNull(doc.getElementsByTagName("isbn").item(0));
 		assertNull(doc.getElementsByTagName("oclcid").item(0));

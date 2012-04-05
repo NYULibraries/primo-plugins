@@ -21,18 +21,18 @@ import edu.nyu.libraries.util.DataWarehouse;
  * DataWarehouse.
  */
 public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
-	private SectionTag mapperSectionTag;
+	private SectionTag mapFromSectionTag;
 	private final String sqlQuery;
 
 	/**
 	 * @param dataWarehouse
 	 * @param enrichmentSectionTags
 	 */
-	public SingleTableMapper(String tableName, String mappingColumnName, 
-			String bsnColumnName, SectionTag mapperSectionTag, 
+	public SingleTableMapper(String mappingTableName, String mappedToColumnName, 
+			String mappedFromColumnName, SectionTag mapFromSectionTag, 
 			DataWarehouse dataWarehouse, List<SectionTag> enrichmentSectionTags) {
-		this(sqlQuery(tableName, mappingColumnName, bsnColumnName), mapperSectionTag,
-				dataWarehouse, enrichmentSectionTags);
+		this(sqlQuery(mappingTableName, mappedToColumnName, mappedFromColumnName), 
+				mapFromSectionTag, dataWarehouse, enrichmentSectionTags);
 	}
 
 	/**
@@ -41,11 +41,11 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	 * @param dataWarehouse
 	 * @param enrichmentSectionTags
 	 */
-	public SingleTableMapper(String sqlQuery, SectionTag mapperSectionTag, 
+	public SingleTableMapper(String sqlQuery, SectionTag mapFromSectionTag, 
 			DataWarehouse dataWarehouse, List<SectionTag> enrichmentSectionTags) {
 		super(dataWarehouse, enrichmentSectionTags);
 		this.sqlQuery = sqlQuery;
-		this.mapperSectionTag = mapperSectionTag;
+		this.mapFromSectionTag = mapFromSectionTag;
 	}
 	/**
 	 * Adds mappings provided by the NYU Libraries' Aleph DataWarehouse 
@@ -56,12 +56,12 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	@Override
 	public Document enrich(Document doc, IEnrichmentDocUtils docUtil) 
 			throws Exception {
-		String[] mappers = docUtil.
-			getValuesBySectionAndTag(doc, mapperSectionTag.section, mapperSectionTag.tag);
+		String[] mapFromTags = docUtil.
+			getValuesBySectionAndTag(doc, mapFromSectionTag.section, mapFromSectionTag.tag);
 		List<String> mappings = Lists.newArrayList();
-		for (String mapper: mappers) {
+		for (String mapFromTag: mapFromTags) {
 			ResultSet resultSet = 
-				getResultSet(mapper);
+				getResultSet(mapFromTag);
 			while(resultSet.next()) {
 				mappings.add(resultSet.getString(1));
 			}
@@ -77,18 +77,18 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 		return super.getResultSet(sqlQuery + bsn);
 	}
 
-	private final static String sqlQuery(String tableName, 
-			String mappingColumnName,  String bsnColumnName) {
-		if (	tableName == null) 
+	private final static String sqlQuery(String mappingTableName, 
+			String mappedToColumnName,  String mappedFromColumnName) {
+		if (	mappingTableName == null) 
 			throw new NullPointerException(
-				"No property 'table' defined.");
-		if (	mappingColumnName == null) 
+				"No property mapping table defined.");
+		if (	mappedToColumnName == null) 
 			throw new NullPointerException(
-				"No property 'column' defined.");
-		if (	bsnColumnName == null) 
+				"No property mapped to column defined.");
+		if (	mappedFromColumnName == null) 
 			throw new NullPointerException(
-				"No property 'bsnColumn' defined.");
-		return "SELECT " + mappingColumnName + " FROM " + tableName + 
-			" WHERE " + bsnColumnName + " = ";
+				"No property mapped from column defined.");
+		return "SELECT " + mappedToColumnName + " FROM " + mappingTableName + 
+			" WHERE " + mappedFromColumnName + " = ";
 	}
 }

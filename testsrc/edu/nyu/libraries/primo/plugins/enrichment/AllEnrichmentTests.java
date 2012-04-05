@@ -7,8 +7,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { 
-	BsnToOclcTest.class })
+@Suite.SuiteClasses( {
+	AlephBsnMapperTest.class,
+	BsnToOclcMapperTest.class,
+	SingleTableMapperTest.class
+	})
 
 /**
  * @author Scot Dalton

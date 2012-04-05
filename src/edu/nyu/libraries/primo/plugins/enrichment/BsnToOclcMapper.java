@@ -16,10 +16,13 @@ import edu.nyu.libraries.util.DataWarehouseModule;
  * @author Scot Dalton
  * 
  */
-public class BsnToOclc extends AlephBsnMapper {
-	private final static String TABLE_NAME = "HARVARD_PROJECT_OCLC_KEYS";
-	private final static String OCLC_COLUMN_NAME = "OCLC_MASTER";
-	private final static String BSN_COLUMN_NAME = "ALEPH_BSN";
+public class BsnToOclcMapper extends AlephBsnMapper {
+	private final static String MAPPING_TABLE_NAME = 
+		"HARVARD_PROJECT_OCLC_KEYS";
+	private final static String MAP_TO_COLUMN_NAME = 
+		"OCLC_MASTER";
+	private final static String BSN_COLUMN_NAME = 
+		"ALEPH_BSN";
 	private final static List<SectionTag> ENRICHMENT_SECTION_TAGS =
 		Lists.newArrayList(new SectionTag("addata", "oclcid"), 
 			new SectionTag("search", "oclc"));
@@ -31,7 +34,7 @@ public class BsnToOclc extends AlephBsnMapper {
 	 * 
 	 * @throws Exception
 	 */
-	public BsnToOclc() {
+	public BsnToOclcMapper() {
 		this(injector.getInstance(DataWarehouse.class));
 	}
 
@@ -40,8 +43,8 @@ public class BsnToOclc extends AlephBsnMapper {
 	 * 
 	 * @throws Exception
 	 */
-	protected BsnToOclc(DataWarehouse dataWarehouse) {
-		super(TABLE_NAME, OCLC_COLUMN_NAME, BSN_COLUMN_NAME, 
+	protected BsnToOclcMapper(DataWarehouse dataWarehouse) {
+		super(MAPPING_TABLE_NAME, MAP_TO_COLUMN_NAME, BSN_COLUMN_NAME, 
 			dataWarehouse, ENRICHMENT_SECTION_TAGS);
 	}
 }
