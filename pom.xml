@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>edu.nyu.library</groupId>
+  <artifactId>primo-plugins</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>primo-plugins</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>12.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <!-- Needs to be referenced in local repository -->
+    <dependency>
+      <groupId>com.exlibrisgroup.primo</groupId>
+      <artifactId>primo_common-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!-- Needs to be referenced in local repository -->
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>sqljdbc4</artifactId>
+      <version>4.0</version>
+    </dependency>
+    <!-- Needs to be referenced in local repository -->
+<!--     <dependency>
+      <groupId>edu.nyu.library</groupId>
+      <artifactId>datawarehouse</artifactId>
+      <version>1.0</version>
+    </dependency> -->
+  </dependencies>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.9</version>
+          <executions>
+            <execution>
+              <phase>test</phase>
+              <goals>
+                <goal>test</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <scm>
+    <connection>scm:git:git@github.com:NYULibraries/primo-plugins.git</connection>
+    <url>scm:git:git@github.com:NYULibraries/primo-plugins.git</url>
+    <developerConnection>scm:git@github.com:NYULibraries/primo-plugins.git</developerConnection>
+  </scm>
+  <organization>
+    <name>NYULibraries</name>
+    <url>http://library.nyu.edu</url>
+  </organization>
+</project>
+</project>
