@@ -44,6 +44,8 @@ import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
 public class AlephBsnMapperTest {
 	private final static String propertiesFilename = 
 		"./src/test/resources/META-INF/datawarehouse.properties";
+	private final static String nyuAlephXmlFile = 
+		"./src/test/resources/META-INF/nyu_aleph.xml";
 	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher mappingTableFetcher;
 	private Map<String, Object> enrichmentPluginParams;
@@ -65,7 +67,7 @@ public class AlephBsnMapperTest {
 		mappingTableFetcher = new MappingTableFetcher();
 		enrichmentPluginParams = Maps.newHashMap();
 		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().
-			parse(new File("testfiles/nyu_aleph.xml"));
+			parse(new File(nyuAlephXmlFile));
 		File propertiesFile = new File(propertiesFilename);
 		Injector injector = 
 			Guice.createInjector(new DataWarehouseModule(propertiesFile));

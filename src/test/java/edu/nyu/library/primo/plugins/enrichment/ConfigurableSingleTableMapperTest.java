@@ -41,6 +41,8 @@ import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
 public class ConfigurableSingleTableMapperTest {
 	private final static String propertiesFilename = 
 		"./src/test/resources/META-INF/datawarehouse.properties";
+	private final static String nyuAlephXmlFile = 
+		"./src/test/resources/META-INF/nyu_aleph.xml";
 	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher mappingTableFetcher;
 	private Map<String, Object> enrichmentPluginParams;
@@ -68,7 +70,7 @@ public class ConfigurableSingleTableMapperTest {
 		enrichmentPluginParams.put("enrichmentSection2", "search");
 		enrichmentPluginParams.put("enrichmentTag2", "oclc");
 		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().
-			parse(new File("testfiles/nyu_aleph.xml"));
+			parse(new File(nyuAlephXmlFile));
 		File propertiesFile = new File(propertiesFilename);
 		Injector injector = 
 			Guice.createInjector(new DataWarehouseModule(propertiesFile));
