@@ -3,6 +3,9 @@
  */
 package edu.nyu.library.primo.plugins.enrichment;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,7 +15,6 @@ import org.w3c.dom.Document;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 import edu.nyu.library.datawarehouse.DataWarehouse;
 import edu.nyu.library.datawarehouse.DataWarehouseModule;
@@ -24,6 +26,8 @@ import edu.nyu.library.datawarehouse.DataWarehouseModule;
  * DataWarehouse.
  */
 public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
+	private final static String propertiesFilename = 
+		"./src/main/resources/META-INF/datawarehouse.properties";
 	private SectionTag mapFromSectionTag;
 	private final String sqlQuery;
 
@@ -34,13 +38,16 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	 * @param mappedFromColumnName
 	 * @param mapFromSectionTag
 	 * @param enrichmentSectionTags
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
 	public SingleTableMapper(String mappingTableName, String mappedToColumnName, 
 			String mappedFromColumnName, SectionTag mapFromSectionTag, 
-			List<SectionTag> enrichmentSectionTags) {
+			List<SectionTag> enrichmentSectionTags) throws FileNotFoundException, IOException {
 		this(sqlQuery(mappingTableName, mappedToColumnName, mappedFromColumnName), 
-				mapFromSectionTag, injector.getInstance(DataWarehouse.class),
-					enrichmentSectionTags);
+				mapFromSectionTag, Guice.createInjector(new DataWarehouseModule(new File(
+					propertiesFilename))).getInstance(DataWarehouse.class),
+						enrichmentSectionTags);
 	}
 
 	/**
@@ -64,11 +71,14 @@ public class SingleTableMapper extends DataWarehouseEnrichmentPlugin {
 	 * @param sqlQuery
 	 * @param mapFromSectionTag
 	 * @param enrichmentSectionTags
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
 	public SingleTableMapper(String sqlQuery, SectionTag mapFromSectionTag, 
-			List<SectionTag> enrichmentSectionTags) {
-		this(sqlQuery, mapFromSectionTag, 
-			injector.getInstance(DataWarehouse.class), enrichmentSectionTags);
+			List<SectionTag> enrichmentSectionTags) throws FileNotFoundException, IOException {
+		this(sqlQuery, mapFromSectionTag, Guice.createInjector(
+			new DataWarehouseModule(new File(propertiesFilename))).
+				getInstance(DataWarehouse.class), enrichmentSectionTags);
 	}
 
 	/**

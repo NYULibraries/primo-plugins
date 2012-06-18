@@ -8,5 +8,5 @@ src/edu/nyu/libraries/primo/plugins/Index.java
 *.war
 *.ear
 target
-datawarehouse.properties
+*.properties
 

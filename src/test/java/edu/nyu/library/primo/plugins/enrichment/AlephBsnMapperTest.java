@@ -29,9 +29,10 @@ import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 
-import edu.nyu.libary.datawarehouse.DataWarehouse;
-import edu.nyu.libary.datawarehouse.DataWarehouseModule;
+import edu.nyu.library.datawarehouse.DataWarehouse;
+import edu.nyu.library.datawarehouse.DataWarehouseModule;
 import edu.nyu.library.primo.plugins.test.util.EnrichmentDocUtils;
 import edu.nyu.library.primo.plugins.test.util.MappingTableFetcher;
 import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
@@ -41,6 +42,8 @@ import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
  *
  */
 public class AlephBsnMapperTest {
+	private final static String propertiesFilename = 
+		"./src/test/resources/META-INF/datawarehouse.properties";
 	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher mappingTableFetcher;
 	private Map<String, Object> enrichmentPluginParams;
@@ -63,9 +66,10 @@ public class AlephBsnMapperTest {
 		enrichmentPluginParams = Maps.newHashMap();
 		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().
 			parse(new File("testfiles/nyu_aleph.xml"));
-		dataWarehouse = Guice.createInjector(
-			new DataWarehouseModule("./META-INF/datawarehouse.properties")).
-				getInstance(DataWarehouse.class);
+		File propertiesFile = new File(propertiesFilename);
+		Injector injector = 
+			Guice.createInjector(new DataWarehouseModule(propertiesFile));
+		dataWarehouse = injector.getInstance(DataWarehouse.class);
 		mappingTableName = "HARVARD_PROJECT_OCLC_KEYS";
 		mapToColumnName = "OCLC_MASTER";
 		mapFromColumnName = "ALEPH_BSN";

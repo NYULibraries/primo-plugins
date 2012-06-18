@@ -3,6 +3,7 @@
  */
 package edu.nyu.library.primo.plugins.enrichment;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -15,9 +16,12 @@ import edu.nyu.library.datawarehouse.DataWarehouseModule;
 
 /**
  * @author Scot Dalton
- * 
+ * Includes OCLC Numbers in the PNX record.  Uses a mapping table in
+ * the NYU Data Warehouse to map from Aleph BSNs to OCLC numbers.
  */
 public class BsnToOclcMapper extends AlephBsnMapper {
+	private final static String propertiesFilename = 
+		"./src/main/resources/META-INF/datawarehouse.properties";
 	private final static String MAPPING_TABLE_NAME = 
 		"HARVARD_PROJECT_OCLC_KEYS";
 	private final static String MAP_TO_COLUMN_NAME = 
@@ -35,9 +39,8 @@ public class BsnToOclcMapper extends AlephBsnMapper {
 	 * @throws Exception
 	 */
 	public BsnToOclcMapper() throws FileNotFoundException, IOException {
-		this(Guice.createInjector(new DataWarehouseModule(
-			"./src/main/resources/META-INF/datawarehouse.properties")).
-				getInstance(DataWarehouse.class));
+		this(Guice.createInjector(new DataWarehouseModule(new File(
+			propertiesFilename))).getInstance(DataWarehouse.class));
 	}
 
 	/**

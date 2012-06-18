@@ -13,7 +13,7 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import main.java.edu.nyu.library.primo.plugins.enrichment.BsnToOclcMapper;
+import edu.nyu.library.primo.plugins.enrichment.BsnToOclcMapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,9 +26,10 @@ import com.exlibris.primo.api.common.IPrimoLogger;
 import com.exlibris.primo.api.plugins.enrichment.IEnrichmentDocUtils;
 import com.google.common.collect.Maps;
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 
-import edu.nyu.libary.datawarehouse.DataWarehouse;
-import edu.nyu.libary.datawarehouse.DataWarehouseModule;
+import edu.nyu.library.datawarehouse.DataWarehouse;
+import edu.nyu.library.datawarehouse.DataWarehouseModule;
 import edu.nyu.library.primo.plugins.test.util.EnrichmentDocUtils;
 import edu.nyu.library.primo.plugins.test.util.MappingTableFetcher;
 import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
@@ -39,6 +40,10 @@ import edu.nyu.library.primo.plugins.test.util.PrimoLogger;
  *
  */
 public class BsnToOclcMapperTest {
+	private final static String propertiesFilename = 
+		"./src/test/resources/META-INF/datawarehouse.properties";
+	private final static String nyuAlephXmlFile = 
+		"./src/test/resources/META-INF/nyu_aleph.xml";
 	private IPrimoLogger primoLogger;
 	private IMappingTablesFetcher mappingTableFetcher;
 	private Map<String, Object> enrichmentPluginParams;
@@ -56,10 +61,11 @@ public class BsnToOclcMapperTest {
 		mappingTableFetcher = new MappingTableFetcher();
 		enrichmentPluginParams = Maps.newHashMap();
 		doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().
-			parse(new File("testfiles/nyu_aleph.xml"));
-		dataWarehouse = Guice.createInjector(
-			new DataWarehouseModule("./META-INF/datawarehouse.properties")).
-				getInstance(DataWarehouse.class);
+			parse(new File(nyuAlephXmlFile));
+		File propertiesFile = new File(propertiesFilename);
+		Injector injector = 
+			Guice.createInjector(new DataWarehouseModule(propertiesFile));
+		dataWarehouse = injector.getInstance(DataWarehouse.class);
 	}
 
 	/**
