@@ -1,8 +1,12 @@
 src/edu/nyu/libraries/primo/plugins/Index.java
-META-INF/datawarehouse.properties
-bin/
-dist/
-jar/
-.classpath
 .project
 .settings
+.classpath
+*.class
+# Package Files #
+*.jar
+*.war
+*.ear
+target
+*.properties
+
