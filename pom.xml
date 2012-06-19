@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.nyu.library</groupId>
@@ -86,9 +87,21 @@
 				<version>2.3.2</version>
 			</plugin>
 		</plugins>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
 	</build>
-  <distributionManagement>
-  </distributionManagement>
+	<distributionManagement>
+		<repository>
+			<id>primodev</id>
+			<name>Primo Development Server</name>
+			<url>scpexe://primo@primodev3.bobst.nyu.edu/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment</url>
+		</repository>
+	</distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>
@@ -102,8 +115,8 @@
 		<connection>scm:git:git://github.com:NYULibraries/primo-plugins.git</connection>
 		<url>scm:git:git@github.com:NYULibraries/primo-plugins.git</url>
 		<developerConnection>scm:git:git@github.com:NYULibraries/primo-plugins.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<organization>
 		<name>NYULibraries</name>
 		<url>http://library.nyu.edu</url>
