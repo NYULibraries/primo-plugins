@@ -5,7 +5,7 @@ set :user, "primo"
 
 set :scm, :git
 set :repository,  "git@github.com:NYULibraries/primo-plugins.git"
-set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :deploy_to, "/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment"
 
 set :use_sudo, false
@@ -19,14 +19,18 @@ namespace :deploy do
     Package the jar with maven.
   DESC
   task :package do
-    run "mvn clean && mvn package"
+    run_locally "git checkout #{branch} && mvn clean && mvn package"
   end
   
   desc <<-DESC
+    Push javadocs to GitHub pages.
   DESC
   task :javadocs do
-    # run "git checkout gh-pages && cp #{build_dir}/apidocs"
+    run_locally "mvn javadoc:javadoc && git checkout gh-pages && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push && git checkout #{branch}"
   end
+  
+   
+  before "deploy", "deploy:package", "deploy:javadocs"
   
   desc <<-DESC
     No restart necessary for Primo.
