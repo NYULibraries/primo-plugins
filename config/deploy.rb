@@ -46,10 +46,10 @@ namespace :deploy do
     puts "Skipping symlink creation."
   end
   
-  desc <<-DESC
-  DESC
-  task :update_code do
-  end
+  # desc <<-DESC
+  # DESC
+  # task :update_code do
+  # end
 
   desc <<-DESC
     
