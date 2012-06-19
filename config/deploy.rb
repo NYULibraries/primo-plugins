@@ -1,25 +1,56 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+# Call with cap -S branch="<branch-name>" [staging|production] deploy
+require 'capistrano/ext/multistage'
+set :application, "primo-custom"
+set :user, "primo"
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :scm, :git
+set :repository,  "git@github.com:NYULibraries/primo-plugins.git"
+set :deploy_via, :remote_cache
+set :deploy_to, "/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment"
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :use_sudo, false
+set :stages, ["staging", "production"]
+set :default_stage, "staging"
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+set :build_dir, "target"
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+namespace :deploy do
+  desc <<-DESC
+    Package the jar with maven.
+  DESC
+  task :package do
+    run "mvn clean && mvn package"
+  end
+  
+  desc <<-DESC
+  DESC
+  task :javadocs do
+    run "git"
+  end
+  
+  desc <<-DESC
+    No restart necessary for Primo.
+  DESC
+  task :restart do
+    puts "Skipping restart."
+  end
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+  desc <<-DESC
+    No symlink creation necessary for Primo.
+  DESC
+  task :create_symlink do
+    puts "Skipping symlink creation."
+  end
+
+  desc <<-DESC
+    Touches up the released code. This is called by update_code after the basic \
+    deploy finishes. Overrides internal implementation since the internal \
+    implementation assumes rails.
+
+    This task will make the release group-writable (if the :group_writable \
+    variable is set to true, which is the default). It will copy the latest \
+    release to the custom directory and cleanup the releases.
+  DESC
+  task :finalize_update, :except => { :no_release => true } do
+  end
+end

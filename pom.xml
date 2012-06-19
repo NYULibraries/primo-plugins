@@ -96,7 +96,7 @@
 				<version>2.7</version>
 				<configuration>
 					<generatePOM>false</generatePOM>
-					<url>sftp://primo@primodev3.bobst.nyu.edu/exlibris/primo/scot</url>
+					<url>sftp://primo@primodev3.bobst.nyu.edu/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment</url>
 					<groupId>${project.groupId}</groupId>
 					<artifactId>${project.artifactId}</artifactId>
 					<version>${project.version}</version>
