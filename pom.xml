@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>edu.nyu.library</groupId>
 	<artifactId>primo-plugins</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-alpha.1</version>
 	<packaging>jar</packaging>
 
 	<name>primo-plugins</name>
@@ -101,7 +100,8 @@
 		<connection>scm:git:git://github.com:NYULibraries/primo-plugins.git</connection>
 		<url>scm:git:git@github.com:NYULibraries/primo-plugins.git</url>
 		<developerConnection>scm:git:git@github.com:NYULibraries/primo-plugins.git</developerConnection>
-	</scm>
+	  <tag>primo-plugins-1.0.0-alpha.1</tag>
+  </scm>
 	<organization>
 		<name>NYULibraries</name>
 		<url>http://library.nyu.edu</url>
