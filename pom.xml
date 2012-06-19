@@ -52,6 +52,15 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.12</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -83,6 +92,20 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<generatePOM>false</generatePOM>
+					<url>sftp://primo@primodev3.bobst.nyu.edu/exlibris/primo/scot</url>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>${project.artifactId}</artifactId>
+					<version>${project.version}</version>
+          <packaging>${project.packaging}</packaging>
+					<file>${project.build.directory}\/${project.artifactId}-${project.version}.${project.packaging}</file>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.3.2</version>
 			</plugin>
@@ -90,18 +113,11 @@
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
+				<artifactId>wagon-ssh</artifactId>
 				<version>2.2</version>
 			</extension>
 		</extensions>
 	</build>
-	<distributionManagement>
-		<repository>
-			<id>primodev</id>
-			<name>Primo Development Back Office Server</name>
-			<url>scpexe://primo@primodev3.bobst.nyu.edu/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment</url>
-		</repository>
-	</distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>
