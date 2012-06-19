@@ -26,7 +26,7 @@ namespace :deploy do
     Push javadocs to GitHub pages.
   DESC
   task :javadocs do
-    run_locally "mvn javadoc:javadoc && git checkout gh-pages && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push && git checkout #{branch}"
+    run_locally "mvn javadoc:javadoc && git checkout gh-pages && rm -r apidocs && mv #{build_dir}/site/apidocs apidocs && git add apidocs && git commit -am 'Add javadocs.' && git push && git checkout #{branch}"
   end
   
    
