@@ -1,6 +1,6 @@
 # Call with cap -S branch="<branch-name>" [staging|production] deploy
 require 'capistrano/ext/multistage'
-set :application, "primo-custom"
+set :application, "primo-plugins"
 set :user, "primo"
 
 set :scm, :git
@@ -49,6 +49,7 @@ namespace :deploy do
   desc <<-DESC
   DESC
   task :update_code do
+    puts Dir.pwd
     top.upload File.new("#{build_dir}/primo-plugin.jar"), "#{deploy_to}"
   end
 
