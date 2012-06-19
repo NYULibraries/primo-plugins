@@ -87,6 +87,8 @@
 			</plugin>
 		</plugins>
 	</build>
+  <distributionManagement>
+  </distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>
