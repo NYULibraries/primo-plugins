@@ -49,7 +49,9 @@ namespace :deploy do
   desc <<-DESC
   DESC
   task :update_code do
-    upload("#{build_dir}/*.jar", "#{deploy_to}")
+    puts "#{build_dir}/*.jar"
+    puts "#{deploy_to}"
+    upload "#{build_dir}/*.jar", "#{deploy_to}"
   end
 
   desc <<-DESC
