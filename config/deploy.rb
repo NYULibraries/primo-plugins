@@ -49,7 +49,7 @@ namespace :deploy do
   desc <<-DESC
   DESC
   task :update_code do
-    top.upload File.join(Dir.pwd, build_dir, "primo-plugin.jar"), "#{deploy_to}"
+    top.upload File.join(build_dir, "primo-plugins.jar"), "#{deploy_to}", :via => :scp
   end
 
   desc <<-DESC
