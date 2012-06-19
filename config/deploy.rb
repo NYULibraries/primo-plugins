@@ -12,7 +12,7 @@ set :use_sudo, false
 set :stages, ["staging", "production"]
 set :default_stage, "staging"
 
-set :build_dir, "./target"
+set :build_dir, "target"
 
 namespace :deploy do
   desc <<-DESC
