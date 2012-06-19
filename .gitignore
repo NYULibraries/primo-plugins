@@ -9,5 +9,6 @@ src/edu/nyu/libraries/primo/plugins/Index.java
 *.ear
 target
 *.properties
+settings-security.xml
 settings.xml
 

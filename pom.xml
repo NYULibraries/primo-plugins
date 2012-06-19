@@ -98,7 +98,7 @@
 	<distributionManagement>
 		<repository>
 			<id>primodev</id>
-			<name>Primo Development Server</name>
+			<name>Primo Development Back Office Server</name>
 			<url>scpexe://primo@primodev3.bobst.nyu.edu/exlibris/primo/p3_1/ng/primo/home/profile/publish/publish/production/conf/plugins/enrichment</url>
 		</repository>
 	</distributionManagement>
