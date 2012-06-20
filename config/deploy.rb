@@ -1,6 +1,6 @@
 # Call with cap -S branch="<branch-name>" -S user="<user>" [staging|production] deploy
 require 'capistrano/ext/multistage'
-set :application, "primo-plugins"
+set :application, "plugins"
 set(:user, 'primo') unless exists?(:user)
 set :scm, :git
 set :repository,  "git@github.com:NYULibraries/primo-plugins.git"
