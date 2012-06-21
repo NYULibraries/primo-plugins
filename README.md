@@ -3,14 +3,14 @@ Primo Plugins
 Primo plugins are hooks into Primo to extend functionality. 
 This project represents the base classes and common utilities shared across plugins.
 
-For more information, see the [API documentation](./apidocs)
-
 NYU uses or will use 
 
 1. [Enrichment Plugins](http://exlibrisgroup.org/display/PrimoOI/Enrichment+Plug-In+%28new+version%29)
 2. [RTA Plugins](http://exlibrisgroup.org/display/PrimoOI/RTA+Plug-In+%28new+version%29)
 3. [Push To Plugins](http://exlibrisgroup.org/display/PrimoOI/PushTo+Plug-In+%28export+records+to+social+bookmark+sites%29)
 4. [File Splitter Plugins](http://exlibrisgroup.org/display/PrimoOI/File+Splitter+Plug-In)
+
+For more information, see the [API documentation](http://nyulibraries.github.com/primo-plugins/apidocs)
 
 The project leverages [Apache Maven](http://maven.apache.org/) for managing dependencies, building, packaging and generating Javadocs.
 
