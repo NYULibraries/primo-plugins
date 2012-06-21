@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Primo Plugins by NYULibraries</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Primo Plugins</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/NYULibraries/primo-plugins/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/NYULibraries/primo-plugins/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/NYULibraries/primo-plugins">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/NYULibraries">NYULibraries</a></p>
+
+
+      </header>
+      <section>
+        <h1>Primo Plugins</h1>
+
+<p>Primo plugins are hooks into Primo to extend functionality. 
+This project represents the base classes and common utilities shared across plugins.</p>
+
+<p>NYU uses or will use </p>
+
+<ol>
+<li><a href="http://exlibrisgroup.org/display/PrimoOI/Enrichment+Plug-In+%28new+version%29">Enrichment Plugins</a></li>
+<li><a href="http://exlibrisgroup.org/display/PrimoOI/RTA+Plug-In+%28new+version%29">RTA Plugins</a></li>
+<li><a href="http://exlibrisgroup.org/display/PrimoOI/PushTo+Plug-In+%28export+records+to+social+bookmark+sites%29">Push To Plugins</a></li>
+<li><a href="http://exlibrisgroup.org/display/PrimoOI/File+Splitter+Plug-In">File Splitter Plugins</a></li>
+</ol><p>For more information, see the <a href="http://nyulibraries.github.com/primo-plugins/apidocs">API documentation</a></p>
+
+<p>The project leverages <a href="http://maven.apache.org/">Apache Maven</a> for managing dependencies, building, packaging and generating Javadocs.</p>
+
+<p>To install the package locally, run:</p>
+
+<pre><code>$ mvn install
+</code></pre>
+
+<p>To implement Primo plugins several Primo libraries are required. 
+To build the maven project we must download the appropriate JARs from the Primo servers and 
+store them in our workstation's local maven repository.</p>
+
+<p>Enrichment Plugins and RTA Plugins Dependency</p>
+
+<pre><code>Download jar from the back office server at: $primo_dev/ng/primo/home/system/publish/client/primo_common-api.jar
+$ mvn install:install-file -Dfile=primo_common-api.jar \
+-Dpackaging=jar -DgroupId=com.exlibrisgroup.primo \ 
+-DartifactId=primo_common-api -Dversion=1.0
+</code></pre>
+
+<p>Push To Plugins Dependencies</p>
+
+<pre><code>Download jar at: $primo_dev/ng/primo/home/thirdparty/openserver/server/search/deploy/primo_library-app.ear/lib/primo_library-common.jar
+$ mvn install:install-file -Dfile=primo_library-common.jar \
+-Dpackaging=jar -DgroupId=com.exlibrisgroup.primo \ 
+-DartifactId=primo_library-common -Dversion=1.0
+
+Download jar at: $primo_dev/ng/primo/home/system/thirdparty/openserver/server/search/deploy/jaguar-web.ear/lib/jaguar-client.jar
+$ mvn install:install-file -Dfile=jaguar-client.jar \
+-Dpackaging=jar -DgroupId=com.exlibrisgroup.primo \ 
+-DartifactId=jaguar-client -Dversion=1.0
+</code></pre>
+
+<p>File Splitter Plugins Dependency</p>
+
+<pre><code>Download jar at: $primo_dev/ng/primo/home/system/publish/client/primo__publishing-api.jar
+$ mvn install:install-file -Dfile=primo_publishing-api.jar \
+-Dpackaging=jar -DgroupId=com.exlibrisgroup.primo \ 
+-DartifactId=primo_publishing-api -Dversion=1.0
+</code></pre>
+
+<p>The NYU Libraries uses <a href="https://github.com/capistrano/capistrano">Capistrano</a> as its deploy tool. 
+The deploy mechanism assumes <a href="https://rvm.io/" title="Ruby Version Manager">rvm</a> and 
+<a href="http://www.ruby-lang.org/en/news/2012/02/16/ruby-1-9-3-p125-is-released/">Ruby 1.9.3-p125</a> 
+on the local deploy host but they may not be necessary. 
+In order to deploy: </p>
+
+<pre><code>$ cap [-S branch=&lt;branch-name&gt;] [-S user=&lt;user-name&gt;] [staging|production] deploy:&lt;task&gt;
+</code></pre>
+
+<p>Since the Primo plugins library can be leveraged across servers, deploy tasks are created for specific deploys.
+Currently the following deploy tasks are available</p>
+
+<ul>
+<li>enrichment</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+		
+  </body>
+</html>
