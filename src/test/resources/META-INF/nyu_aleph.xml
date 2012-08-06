@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record>
+	<control>
+		<sourcerecordid>001969478</sourcerecordid>
+		<sourceid>nyu_aleph</sourceid>
+		<recordid>nyu_aleph001969478</recordid>
+		<originalsourceid>NYU01</originalsourceid>
+		<ilsapiid>NYU01001969478</ilsapiid>
+		<sourceformat>MARC21</sourceformat>
+		<sourcesystem>Aleph</sourcesystem>
+	</control>
+	<display>
+		<type>book</type>
+		<title>John Steinbeck's The grapes of wrath</title>
+		<creator>Frank Galati</creator>
+		<contributor>John Steinbeck 1902-1968.</contributor>
+		<publisher>New York : Penguin Books</publisher>
+		<creationdate>1991</creationdate>
+		<format>148 p. : ill. ; 22 cm..</format>
+		<identifier>$$Cisbn$$V0140482326 :; $$Cisbn$$V9780140482324
+		</identifier>
+		<language>eng</language>
+		<relation>Steinbeck, John, 1902-1968. Grapes of wrath.</relation>
+		<source>nyu_aleph</source>
+		<availlibrary>$$INYU$$LBOBST$$1Main Collection$$2(PS3557.A3927 J6 1991
+			)$$Sunavailable$$31$$41$$5N$$64$$XNYU50$$YBOBST$$ZMAIN</availlibrary>
+		<lds02>nyu_aleph001969478</lds02>
+		<lds01>NYU</lds01>
+		<availinstitution>$$INYU$$Sunavailable</availinstitution>
+		<availpnx>unavailable</availpnx>
+	</display>
+	<links>
+		<openurl>$$Topenurl_journal</openurl>
+		<backlink>$$Taleph_backlink$$DMore bibliographic information
+		</backlink>
+		<thumbnail>$$Tamazon_thumb</thumbnail>
+		<linktotoc>$$Tamazon_toc$$DCheck for Amazon Search Inside</linktotoc>
+		<openurlfulltext>$$Topenurlfull_journal</openurlfulltext>
+		<linktoholdings>$$Taleph_holdings</linktoholdings>
+		<linktoreview>$$TpersistentUrl$$DCopy item link</linktoreview>
+		<linktouc>$$Tamazon_uc$$DCheck Amazon</linktouc>
+		<linktouc>$$Tworldcat_isbn$$DCheck other libraries (WorldCat®)
+		</linktouc>
+		<linktoexcerpt>$$Tsyndetics_excerpt$$DExcerpt from item
+		</linktoexcerpt>
+	</links>
+	<search>
+		<creatorcontrib>Frank Galati</creatorcontrib>
+		<creatorcontrib>Galati, Frank.</creatorcontrib>
+		<creatorcontrib>Galati, F</creatorcontrib>
+		<creatorcontrib>by Frank Galati.</creatorcontrib>
+		<creatorcontrib>John, Steinbeck 1902-1968.</creatorcontrib>
+		<creatorcontrib>Steinbeck, J</creatorcontrib>
+		<creatorcontrib>Steynbek, Con, 1902-1968</creatorcontrib>
+		<creatorcontrib>Ishtāynʹbik, 1902-1968</creatorcontrib>
+		<creatorcontrib>Steĭnbek, Dzhon, 1902-1968</creatorcontrib>
+		<creatorcontrib>Ssu-tʻan-pei-kʻo, 1902-1968</creatorcontrib>
+		<creatorcontrib>Sṭenbeḳ, G'on, 1902-1968</creatorcontrib>
+		<creatorcontrib>Sṭainbeḳ, G'., 1902-1968</creatorcontrib>
+		<creatorcontrib>Steinbeck, John Ernst, 1902-1968</creatorcontrib>
+		<creatorcontrib>Sutainbekku, Jon Ānsuto, 1902-1968</creatorcontrib>
+		<creatorcontrib>Ssu-tʻan-pei-kʻo, Yüeh-han, 1902-1968</creatorcontrib>
+		<creatorcontrib>Ishtāynʹbik, Jān, 1902-1968</creatorcontrib>
+		<creatorcontrib>Stainmpek, Tzōn, 1902-1968</creatorcontrib>
+		<creatorcontrib>Стейнбек, Джон, 1902-1968</creatorcontrib>
+		<creatorcontrib>ג׳והן, סטיינרג</creatorcontrib>
+		<creatorcontrib>סטיינבק ג׳והן</creatorcontrib>
+		<creatorcontrib>סטיינבק, ג׳</creatorcontrib>
+		<creatorcontrib>סטיינבק, ג׳והן</creatorcontrib>
+		<creatorcontrib>סטיינבק, ג׳והן, 1902־1968</creatorcontrib>
+		<creatorcontrib>סטיינבק, ג׳ון</creatorcontrib>
+		<creatorcontrib>סטיינבק, ג׳ון, 1902־1968</creatorcontrib>
+		<creatorcontrib>סטײנבק, ג׳והן, 1902־1968</creatorcontrib>
+		<creatorcontrib>סטײנבק, ג׳ון, 1902־1968</creatorcontrib>
+		<creatorcontrib>استاينℓبك، جان ارنست</creatorcontrib>
+		<creatorcontrib>ジョンスタインベック, 1902-1968</creatorcontrib>
+		<creatorcontrib>ジョン.スタインベック, 1902-1968</creatorcontrib>
+		<creatorcontrib>スタインベック, ジョン, 1902-1968</creatorcontrib>
+		<title>John Steinbeck's The grapes of wrath /</title>
+		<general>Penguin Books,</general>
+		<sourceid>nyu_aleph</sourceid>
+		<recordid>nyu_aleph001969478</recordid>
+		<isbn>0140482326</isbn>
+		<isbn>9780140482324</isbn>
+		<rsrctype>book</rsrctype>
+		<creationdate>1991</creationdate>
+		<addtitle>Grapes of wrath.</addtitle>
+		<searchscope>BOBST</searchscope>
+		<searchscope>BOBST Main Collection</searchscope>
+		<searchscope>nyu_aleph</searchscope>
+		<searchscope>NYU</searchscope>
+		<scope>BOBST</scope>
+		<scope>BOBST Main Collection</scope>
+		<scope>nyu_aleph</scope>
+		<scope>NYU</scope>
+		<lsr01>PS3557.A3927 J6 1991</lsr01>
+		<lsr01>PS3557 .A3927 J6 1991</lsr01>
+		<lsr02>Penguin Books,</lsr02>
+	</search>
+	<sort>
+		<title>John Steinbeck's The grapes of wrath /</title>
+		<creationdate>1991</creationdate>
+		<author>Galati, Frank.</author>
+	</sort>
+	<facets>
+		<language>eng</language>
+		<creationdate>1991</creationdate>
+		<collection>BOBST</collection>
+		<prefilter>books</prefilter>
+		<rsrctype>books</rsrctype>
+		<creatorcontrib>Galati, F</creatorcontrib>
+		<creatorcontrib>Steinbeck, J</creatorcontrib>
+		<library>BOBST</library>
+		<lfc01>Main Collection</lfc01>
+		<classificationlcc>P - Language and literature.–American
+			literature–Individual authors–1961-2000</classificationlcc>
+	</facets>
+	<dedup>
+		<t>1</t>
+		<c1>90028650</c1>
+		<c2>0140482326;9780140482324</c2>
+		<c3>johnsteinbecksthegrapesofwrath</c3>
+		<c4>1991</c4>
+		<f1>90028650</f1>
+		<f3>0140482326;9780140482324</f3>
+		<f5>johnsteinbecksthegrapesofwrath</f5>
+		<f6>1991</f6>
+		<f7>john steinbecks the grapes of wrath</f7>
+		<f8>nyu</f8>
+		<f9>148 p. :</f9>
+		<f10>penguin books</f10>
+		<f11>galati frank</f11>
+	</dedup>
+	<frbr>
+		<t>1</t>
+		<k1>$$Kgalati frank$$AA</k1>
+		<k3>$$Kbookjohn steinbeck's the grapes of wrath$$AT</k3>
+	</frbr>
+	<delivery>
+		<institution>NYU</institution>
+		<delcategory>Physical Item</delcategory>
+	</delivery>
+	<enrichment>
+		<classificationlcc>PS3557.A3927</classificationlcc>
+	</enrichment>
+	<ranking>
+		<booster1>1</booster1>
+		<booster2>1</booster2>
+	</ranking>
+	<addata>
+		<aulast>Galati</aulast>
+		<aufirst>Frank</aufirst>
+		<au>Galati, Frank</au>
+		<addau>Steinbeck, John, 1902-1968</addau>
+		<btitle>John Steinbeck's The grapes of wrath</btitle>
+		<date>1991</date>
+		<risdate>1991.</risdate>
+		<isbn>0140482326</isbn>
+		<isbn>9780140482324</isbn>
+		<format>book</format>
+		<genre>book</genre>
+		<ristype>BOOK</ristype>
+		<cop>New York</cop>
+		<pub>Penguin Books</pub>
+		<lccn>90028650</lccn>
+		<lad01>BOBST</lad01>
+		<lad01>Physical Item</lad01>
+	</addata>
+</record>
