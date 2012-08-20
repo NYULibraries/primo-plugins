@@ -14,7 +14,7 @@ namespace :deploy do
     Package the jar with maven.
   DESC
   task :package do
-    run_locally "git checkout #{branch} && mvn clean && mvn package"
+    # run_locally "git checkout #{branch} && mvn clean && mvn package"
   end
   
   desc <<-DESC
