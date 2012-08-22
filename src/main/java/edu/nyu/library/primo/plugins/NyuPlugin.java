@@ -12,11 +12,11 @@ import com.exlibris.primo.api.common.IPrimoLogger;
 import com.google.common.collect.Lists;
 
 /**
- * @author Scot Dalton
- * 
  * Base abstract class for NYU Plugins.  Should be extended by 
  * all NYU Plugin subclasses in order to provide logging and other
  * central features that all plugins should have available.
+ * 
+ * @author Scot Dalton
  * 
  */
 public abstract class NyuPlugin {
