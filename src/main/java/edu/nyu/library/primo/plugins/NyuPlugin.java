@@ -6,10 +6,14 @@ package edu.nyu.library.primo.plugins;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
+
+import org.perf4j.StopWatch;
 
 import com.exlibris.primo.api.common.IPrimoLogger;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * Base abstract class for NYU Plugins.  Should be extended by 
@@ -23,6 +27,7 @@ public abstract class NyuPlugin {
 	private List<Logger> loggers;
 	private List<IPrimoLogger> primoLoggers;
 	private SimpleDateFormat dateFormat;
+	private Map<String, StopWatch> stopWatches;
 	
 	/**
 	 * Public constructor takes the subsystem name as an argument.
@@ -34,6 +39,7 @@ public abstract class NyuPlugin {
 		primoLoggers = Lists.newArrayList();
 		registerLogger(Logger.getLogger(name));
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS z");
+		stopWatches = Maps.newHashMap();
 	}
 	
 	/**
@@ -97,6 +103,55 @@ public abstract class NyuPlugin {
 			logger.info(formatMsg(msg));
 		for (IPrimoLogger primoLogger: primoLoggers)
 			primoLogger.info(formatMsg(msg));
+	}
+	
+	/**
+	 * Starts a stopwatch with the given tag
+	 * 
+	 * @param tag
+	 */
+	protected void startStopWatch(String tag) {
+		if(!stopWatches.containsKey(tag))
+			stopWatches.put(tag, new StopWatch(tag));
+		stopWatches.get(tag).start();
+	}
+	
+	/**
+	 * Stops the stopwatch with the given tag and
+	 * logs the elapsed time.
+	 * 
+	 * @param tag
+	 */
+	protected void stopStopWatch(String tag) {
+		if(!stopWatches.containsKey(tag))
+			throw new IllegalArgumentException("The requested StopWatch was never started.");
+		StopWatch stopWatch = stopWatches.get(tag);
+		stopWatch.stop();
+		logInfo("Elapsed time for " + tag +": " + getStopWatchElapsedTime(tag));
+	}
+	
+	/**
+	 * Get the StopWatch start time.
+	 * 
+	 * @param tag
+	 * @return
+	 */
+	protected long getStopWatchStartTime(String tag) {
+		if(!stopWatches.containsKey(tag))
+			throw new IllegalArgumentException("The requested StopWatch was never started.");
+		return stopWatches.get(tag).getStartTime();
+	}
+	
+	/**
+	 * Get the StopWatch elapsed time.
+	 * 
+	 * @param tag
+	 * @return
+	 */
+	protected long getStopWatchElapsedTime(String tag) {
+		if(!stopWatches.containsKey(tag))
+			throw new IllegalArgumentException("The requested StopWatch was never started.");
+		return stopWatches.get(tag).getElapsedTime();
 	}
 	
 	/**
