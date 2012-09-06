@@ -127,7 +127,7 @@ public abstract class NyuPlugin {
 			throw new IllegalArgumentException("The requested StopWatch was never started.");
 		StopWatch stopWatch = stopWatches.get(tag);
 		stopWatch.stop();
-		logInfo("Elapsed time for " + tag +": " + getStopWatchElapsedTime(tag));
+		logInfo("Elapsed time for " + tag +": " + Long.toString(getStopWatchElapsedTime(tag)));
 	}
 	
 	/**
